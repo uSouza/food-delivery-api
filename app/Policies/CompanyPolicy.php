@@ -22,11 +22,17 @@ class CompanyPolicy
 
     public function update(User $user, Company $company)
     {
-        return $user->id === $company->user_id;
+        if ($user->type != "admin") {
+            return $user->id === $company->user_id;
+        }
+        return true;
     }
 
     public function delete(User $user, Company $company)
     {
-        return $user->id === $company->user_id;
+        if ($user->type != "admin") {
+            return $user->id === $company->user_id;
+        }
+        return true;
     }
 }
