@@ -24,7 +24,6 @@ class ClientsRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
             'name' => 'required|max:255|min:3',
             'phone' => 'required|telefone_com_ddd',
             'cell_phone' => 'required|celular_com_ddd'
