@@ -19,8 +19,10 @@ class CreateCompaniesTable extends Migration
             $table->string('cnpj');
             $table->string('responsible_name');
             $table->string('responsible_phone');
-            $table->string('name');
+            $table->string('social_name');
+            $table->string('fantasy_name')->nullable();
             $table->string('phone');
+            $table->string('cell_phone')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')

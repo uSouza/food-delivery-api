@@ -17,6 +17,7 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('name');
+            $table->string('cpf')->nullable();
             $table->string('phone');
             $table->string('cell_phone');
             $table->timestamps();
