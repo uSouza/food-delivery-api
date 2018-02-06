@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Http\Requests\ClientsRequest as Request;
 use Carbon\Carbon;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class ClientsController extends Controller
 {
-
     public function index()
     {
         $clients = Cache::remember('api::clients', Carbon::now()->addMinutes(10), function () {
@@ -29,13 +29,17 @@ class ClientsController extends Controller
 
     public function show(Client $client)
     {
-        $this->authorize('update', $client);,
+        if (Auth::user()->type != "admin") {
+            $this->authorize('update', $client);
+        }
         return $client;
     }
 
     public function update(Request $request, Client $client)
     {
-        $this->authorize('update', $client);
+        if (Auth::user()->type != "admin") {
+            $this->authorize('update', $client);
+        }
         Cache::forget('api::clients');
         $client->update($request->all());
         return $client;
@@ -43,7 +47,9 @@ class ClientsController extends Controller
 
     public function destroy(Client $client)
     {
-        $this->authorize('delete', $client);
+        if (Auth::user()->type != "admin") {
+            $this->authorize('delete', $client);
+        }
         Cache::forget('api::clients');
         $client->delete();
         return $client;

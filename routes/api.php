@@ -24,5 +24,6 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::resources([
         'clients' => 'ClientsController',
         'users' => 'UsersController',
+        'companies' => 'CompaniesController'
     ]);
 });
