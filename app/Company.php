@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Company extends Model
 {
-    protected $fillable = ['name', 'phone', 'cnpj', 'responsible_name', 'responsible_phone', 'user_id'];
+    protected $fillable = [
+        'social_name', 'fantasy_name', 'cell_phone',
+        'phone', 'cnpj', 'responsible_name',
+        'responsible_phone', 'user_id',
+    ];
     protected $dates = ['deleted_at'];
     use SoftDeletes;
 /*
@@ -23,9 +27,10 @@ class Company extends Model
     {
         return $this->hasMany(Product::class);
     }
+*/
     public function locations()
     {
         return $this->belongsToMany(Location::class);
     }
-*/
+
 }

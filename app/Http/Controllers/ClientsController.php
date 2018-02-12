@@ -17,7 +17,11 @@ class ClientsController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
-        return Client::create($data);
+        if (Auth::user()->type == "client" || Auth::user()->type == "admin") {
+            return Client::create($data);
+        } else {
+            return "Não está autorizado a cadastrar clientes";
+        }
     }
 
     public function show(Client $client)
@@ -27,15 +31,27 @@ class ClientsController extends Controller
 
     public function update(Request $request, Client $client)
     {
-        $this->authorize('update', $client);
-        $client->update($request->all());
-        return $client;
+        if (Auth::user()->type == "client") {
+            $this->authorize('update', $client);
+            $client->update($request->all());
+            return $client;
+        }
+        if (Auth::user()->type == "admin") {
+            $client->update($request->all());
+            return $client;
+        }
+        return "Não está autorizado a editar este cliente";
     }
 
     public function destroy(Client $client)
     {
-        $this->authorize('delete', $client);
-        $client->delete();
-        return $client;
+        if (Auth::user()->type == "client") {
+            $this->authorize('delete', $client);
+            $client->delete();
+        }
+        if (Auth::user()->type == "admin") {
+            $client->delete();
+        }
+        return "Não está autorizado a excluir este cliente";
     }
 }

@@ -26,5 +26,8 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
         'users' => 'UsersController',
         'companies' => 'CompaniesController',
         'form_payments' => 'FormPaymentsController',
+        'products' => 'ProductsController',
+        'ingredients' => 'IngredientsController',
+        'locations' => 'LocationsController',
     ]);
 });

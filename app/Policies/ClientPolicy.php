@@ -22,17 +22,11 @@ class ClientPolicy
 
     public function update(User $user, Client $client)
     {
-        if ($user->type != "admin") {
-            return $user->id === $client->user_id;
-        }
-        return true;
+        return $user->id === $client->user_id;
     }
 
     public function delete(User $user, Client $client)
     {
-        if ($user->type != "admin") {
-            return $user->id === $client->user_id;
-        }
-        return true;
+        return $user->id === $client->user_id;
     }
 }
