@@ -10,36 +10,38 @@ class ProductsController extends Controller
 
     public function index()
     {
-        //
-    }
-
-    public function create()
-    {
-        //
+        return Product::all();
     }
 
     public function store(Request $request)
     {
-        //
+        $ingredients_ids = $request->input('ingredients_ids');
+        $tags_ids = $request->input('tags_ids');
+        $product = Product::create($request->all());
+        $product->ingredients()->attach($ingredients_ids);
+        $product->tags()->attach($tags_ids);
+        return $product;
     }
 
     public function show(Product $product)
     {
-        //
-    }
-
-    public function edit(Product $product)
-    {
-        //
+        return $product;
     }
 
     public function update(Request $request, Product $product)
     {
-        //
+        $ingredients_ids = $request->input('ingredients_ids');
+        $tags_ids = $request->input('tags_ids');
+        $product->update($request->all());
+        $product->ingredients()->attach($ingredients_ids);
+        $product->tags()->attach($tags_ids);
+        return $product;
     }
 
     public function destroy(Product $product)
     {
-        //
+        $product->ingredients()->detach();
+        $product->tags()->detach();
+        $product->delete();
     }
 }
