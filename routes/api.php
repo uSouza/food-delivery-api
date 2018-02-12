@@ -29,5 +29,6 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
         'products' => 'ProductsController',
         'ingredients' => 'IngredientsController',
         'locations' => 'LocationsController',
+        'tags' => 'TagsController',
     ]);
 });
