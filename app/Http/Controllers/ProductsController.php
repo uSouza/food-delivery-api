@@ -17,7 +17,13 @@ class ProductsController extends Controller
     {
         $ingredients_ids = $request->input('ingredients_ids');
         $tags_ids = $request->input('tags_ids');
-        $product = Product::create($request->all());
+        $product = Product::create([
+            'type' => $request->input('type'),
+            'description' => $request->input('description'),
+            'measure' => $request->input('measure'),
+            'size' => $request->input('size'),
+            'company_id' => $request->input('company_id')
+        ]);
         $product->ingredients()->attach($ingredients_ids);
         $product->tags()->attach($tags_ids);
         return $product;
