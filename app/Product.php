@@ -21,6 +21,11 @@ class Product extends Model
         return $this->belongsToMany(Ingredient::class);
     }
 
+    public function prices()
+    {
+        return $this->belongsToMany(Price::class);
+    }
+
     public function company()
     {
         return $this->belongsTo(Company::class);

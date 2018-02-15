@@ -4,13 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FormPayment extends Model
+class Status extends Model
 {
-    protected $fillable = ['description'];
+    protected $fillable = [
+        'name'
+    ];
 
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
-
 }
