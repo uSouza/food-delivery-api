@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     protected $fillable = [
-        'sale_price', 'sale_discount', 'observation',
-        'client_id', 'company_id', 'status_id',
-        'form_payment_id', 'location_id'
+        'price', 'observation',
+        'client_id', 'company_id', 'deliver', 'status_id',
+        'form_payment_id', 'location_id', 'products_ids',
     ];
 
     use SoftDeletes;

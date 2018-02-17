@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->integer('form_payment_id')->unsigned();
             $table->integer('location_id')->unsigned();
             $table->float('price');
-            $table->string('observation');
+            $table->string('observation')->nullable();
             $table->boolean('deliver');
             $table->timestamps();
             $table->softDeletes();

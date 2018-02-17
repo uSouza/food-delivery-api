@@ -15,10 +15,10 @@ class Client extends Model
     {
         return $this->belongsToMany(Location::class);
     }
-/*
+
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
-*/
+
 }

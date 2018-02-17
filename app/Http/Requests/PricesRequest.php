@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ProductsRequest extends FormRequest
+class PricesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,15 +25,12 @@ class ProductsRequest extends FormRequest
     public function rules()
     {
         return [
-            'type' => [
+            'size' => [
                 'required',
-                Rule::in('bebida', 'marmita'),
+                Rule::in(['P', 'M', 'G', 'GG']),
             ],
-            'company_id' => 'required',
-            'measure' => [
-                'required',
-                Rule::in('UN', 'M', 'CM', 'L', 'ML'),
-            ],
+            'product_id' => 'required',
+            'price' => 'required|min:0',
         ];
     }
 }
