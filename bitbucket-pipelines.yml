@@ -4,7 +4,7 @@ pipelines:
   branches:
     master:
       - step:
-        script:
+          script:
           - apt-get update && apt-get install -y python-dev zip libmcrypt-dev postgresql
           - docker-php-ext-install mcrypt && docker-php-ext-install pdo_postgresql
           - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
