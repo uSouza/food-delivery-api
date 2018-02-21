@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Client;
-use App\Company;
 use App\Order;
 use App\Http\Requests\OrdersRequest as Request;
 use Illuminate\Support\Facades\Auth;

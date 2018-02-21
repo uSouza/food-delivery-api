@@ -1,0 +1,20 @@
+image: php:7-fpm
+
+pipelines:
+  branches:
+    master:
+      - step:
+        script:
+          - apt-get update && apt-get install -y python-dev zip libmcrypt-dev postgresql
+          - docker-php-ext-install mcrypt && docker-php-ext-install pdo_postgresql
+          - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          - php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+          - php composer-setup.php
+          - php -r "unlink('composer-setup.php');"
+          - php composer.phar install
+          - php artisan migrate
+          - curl -O https://bootstrap.pypa.io/get-pip.py
+          - python get-pip.py
+          - pip install awscli
+          - zip -r deploy.zip ./
+          - aws s3 sync --delete . s3://deploy-aws-pandeco
