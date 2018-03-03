@@ -17,4 +17,6 @@ pipelines:
           - python get-pip.py
           - pip install awscli
           - zip -r deploy.zip ./
+          - chmod -R 775 ./storage
+          - chmod -R 777 ./public
           - aws s3 sync --delete . s3://deploy-aws-pandeco
