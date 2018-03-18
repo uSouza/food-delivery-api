@@ -178,9 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         PHPLegends\PtBrValidator\ValidatorProvider::class,
         LaravelLegends\PtBrValidator\ValidatorProvider::class,
-	Laravel\Passport\PassportServiceProvider::class,
-	Barryvdh\Cors\ServiceProvider::class,
-
+	    Laravel\Passport\PassportServiceProvider::class,
+	    Barryvdh\Cors\ServiceProvider::class,
     ],
 
     /*

@@ -13,10 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware(['cors', 'auth:api'])->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::middleware(['cors', 'auth:api'])->prefix('v1')->group(function () {
+Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::get('users/me', function () {
        return request()->user();
     });
