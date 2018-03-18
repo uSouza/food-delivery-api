@@ -12,8 +12,8 @@
         "laravel/framework": "5.5.*",
         "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",
-        "phplegends/pt-br-validator": "2.*",
-        "laravellegends/pt-br-validator" : "5.1.*"
+        "laravellegends/pt-br-validator": "5.1.*",
+        "phplegends/pt-br-validator": "2.*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
