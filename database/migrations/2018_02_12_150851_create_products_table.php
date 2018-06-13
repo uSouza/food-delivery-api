@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('description')->nullable();
             $table->enum('measure', ['UN', 'M', 'CM', 'L', 'ML']);
             $table->char('size')->nullable();
+            $table->date('date');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('company_id')->references('id')
