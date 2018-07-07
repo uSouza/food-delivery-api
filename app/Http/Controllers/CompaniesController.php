@@ -18,7 +18,13 @@ class CompaniesController extends Controller
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
         if (Auth::user()->type == "company" || Auth::user()->type == "admin") {
-            return Company::create($data);
+            $company = Company::create($data);
+            $pathImageUpload = $this->upload($company, $request);
+            if (! $pathImageUpload->empty()){
+                $company->url = $pathImageUpload;
+                return $company;
+            }
+            return "Não foi possível salvar a imagem enviada!";
         }
         return "Usuário não autorizado a cadastrar empresas";
     }
@@ -56,4 +62,18 @@ class CompaniesController extends Controller
         }
         return "Não está autorizado a excluir esta empresa";
     }
+
+    public function upload(Company $company, Request $request)
+    {
+        $url = $request->file('url');
+        $ext = ['jpg', 'png', 'gif', 'jpeg'];
+        $url_ext = $url->extension();
+        if ($url->isValid() and in_array($url_ext, $ext)) {
+            $filename = $company->id . '-' . $company->social_name;
+            $url->storeAs('img/companies', $filename);
+            return "img/companies/" . $filename . $url_ext;
+        }
+        return null;
+    }
+
 }

@@ -23,6 +23,7 @@ class CreateCompaniesTable extends Migration
             $table->string('fantasy_name')->nullable();
             $table->string('phone');
             $table->string('cell_phone')->nullable();
+            $table->string('url');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')
