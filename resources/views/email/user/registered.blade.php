@@ -1,0 +1,1 @@
+<h1>Nome {{$user->name}}</h1>

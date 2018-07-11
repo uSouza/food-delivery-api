@@ -27,7 +27,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
         Passport::routes();
         Passport::enableImplicitGrant();
         Passport::refreshTokensExpireIn(Carbon::now()->addDays(15)); //controlando a validade do refresh token

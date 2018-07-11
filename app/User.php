@@ -34,4 +34,8 @@ class User extends Authenticatable
     public function client() {
         return $this->hasOne(Client::class);
     }
+
+    protected $dispatchesEvents = [
+      'created' => \App\Events\UserCreatedEvent::class
+    ];
 }

@@ -17,16 +17,8 @@ class CompaniesController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
-        if (Auth::user()->type == "company" || Auth::user()->type == "admin") {
-            $company = Company::create($data);
-            $pathImageUpload = $this->upload($company, $request);
-            if (! $pathImageUpload->empty()){
-                $company->url = $pathImageUpload;
-                return $company;
-            }
-            return "Não foi possível salvar a imagem enviada!";
-        }
-        return "Usuário não autorizado a cadastrar empresas";
+        Company::create($data);
+
     }
 
     public function show(Company $company)
