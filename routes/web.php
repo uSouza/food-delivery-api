@@ -10,4 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+use Illuminate\Support\Facades\Redirect;
+
+Route::get('/', function () {
+    return Redirect::to('/doc/index.html');
+});
+
 Auth::routes();
