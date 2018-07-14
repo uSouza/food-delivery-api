@@ -1,0 +1,244 @@
+define({ "api": [
+  {
+    "type": "delete",
+    "url": "api/v1/users/{user}",
+    "title": "Delete a User",
+    "name": "DeleteUser",
+    "group": "User",
+    "version": "0.1.0",
+    "filename": "./example.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "api/v1/users",
+    "title": "Request all Users",
+    "name": "GetUser",
+    "group": "User",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>The user id.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>The user name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>The user type (admin, company or client).</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Email",
+            "optional": false,
+            "field": "email",
+            "description": "<p>The user email.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "data on success:",
+          "content": "{\n\t id: 1,\n\t name: 'Paul',\n\t type: 'client',\n\t email: 'paul@test.com'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./_apidoc.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "api/v1/users",
+    "title": "Request all Users",
+    "name": "GetUser",
+    "group": "User",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>The user id.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>The user name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>The user type (admin, company or client).</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Email",
+            "optional": false,
+            "field": "email",
+            "description": "<p>The user email.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "data on success:",
+          "content": "{\n\t id: 1,\n\t name: 'Paul',\n\t type: 'client',\n\t email: 'paul@test.com'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./example.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "api/v1/users",
+    "title": "Create a new User",
+    "name": "PostUser",
+    "group": "User",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>The user name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>The user type (admin, company or client).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>The valid user email.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>The user password.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password_confirmation",
+            "description": "<p>The user password confirmation.</p>"
+          }
+        ]
+      }
+    },
+    "filename": "./example.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "put",
+    "url": "api/v1/users/{user}",
+    "title": "Change a User",
+    "name": "PutUser",
+    "group": "User",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>The user name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>The user type (admin, company or client).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>The valid user email.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>The user password.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password_confirmation",
+            "description": "<p>The user password confirmation.</p>"
+          }
+        ]
+      }
+    },
+    "filename": "./example.js",
+    "groupTitle": "User"
+  },
+  {
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "varname1",
+            "description": "<p>No type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "varname2",
+            "description": "<p>With type.</p>"
+          }
+        ]
+      }
+    },
+    "type": "",
+    "url": "",
+    "version": "0.0.0",
+    "filename": "./doc/main.js",
+    "group": "_home_uesley_Documentos_Projects_Pandeco_apiPandecoDoc_doc_main_js",
+    "groupTitle": "_home_uesley_Documentos_Projects_Pandeco_apiPandecoDoc_doc_main_js",
+    "name": ""
+  }
+] });
