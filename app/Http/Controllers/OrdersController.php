@@ -25,6 +25,7 @@ class OrdersController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', Order::class);
         $products_ids = $request->input('products_ids');
         $client = Client::whereIn('clients.user_id', function ($query) {
             $query->select('users.id')
@@ -47,11 +48,13 @@ class OrdersController extends Controller
 
     public function show(Order $order)
     {
+        $this->authorize('view', $order);
         return $order;
     }
 
     public function update(Request $request, Order $order)
     {
+        $this->authorize('update', $order);
         $client = Client::whereIn('clients.user_id', function ($query) {
             $query->select('users.id')
                 ->from('users')
@@ -75,6 +78,7 @@ class OrdersController extends Controller
 
     public function destroy(Order $order)
     {
+        $this->authorize('create', $order);
         $order->products()->detach();
         $order->delete();
     }

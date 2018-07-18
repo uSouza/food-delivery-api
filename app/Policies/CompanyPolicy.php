@@ -10,9 +10,16 @@ class CompanyPolicy
 {
     use HandlesAuthorization;
 
+    public function before($user, $ability)
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+    }
+
     public function view(User $user, Company $company)
     {
-        //
+        return $user->id === $company->user_id;
     }
 
     public function create(User $user)
@@ -22,17 +29,11 @@ class CompanyPolicy
 
     public function update(User $user, Company $company)
     {
-        if ($user->type != "admin") {
-            return $user->id === $company->user_id;
-        }
-        return true;
+        return $user->id === $company->user_id;
     }
 
     public function delete(User $user, Company $company)
     {
-        if ($user->type != "admin") {
-            return $user->id === $company->user_id;
-        }
-        return true;
+        return $user->id === $company->user_id;
     }
 }

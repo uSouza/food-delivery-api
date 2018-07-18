@@ -10,7 +10,7 @@ class Company extends Model
     protected $fillable = [
         'social_name', 'fantasy_name', 'cell_phone',
         'phone', 'cnpj', 'responsible_name',
-        'responsible_phone', 'user_id', 'url'
+        'responsible_phone', 'user_id', 'url', 'order_limit'
     ];
     protected $dates = ['deleted_at'];
     use SoftDeletes;

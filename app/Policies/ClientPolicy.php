@@ -10,9 +10,16 @@ class ClientPolicy
 {
     use HandlesAuthorization;
 
+    public function before($user, $ability)
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+    }
+
     public function view(User $user, Client $client)
     {
-        //
+        return $user->id === $client->user_id;
     }
 
     public function create(User $user)

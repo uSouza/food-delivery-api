@@ -35,6 +35,10 @@ class User extends Authenticatable
         return $this->hasOne(Client::class);
     }
 
+    public function isAdmin() {
+        return $this->type === "admin";
+    }
+
     protected $dispatchesEvents = [
       'created' => \App\Events\UserCreatedEvent::class
     ];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Http\Requests\ClientsRequest as Request;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 
 class ClientsController extends Controller
@@ -15,43 +16,28 @@ class ClientsController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', Client::class);
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
-        if (Auth::user()->type == "client" || Auth::user()->type == "admin") {
-            return Client::create($data);
-        } else {
-            return "Não está autorizado a cadastrar clientes";
-        }
+        return Client::create($data);
     }
 
     public function show(Client $client)
     {
+        $this->authorize('view', $client);
         return $client;
     }
 
     public function update(Request $request, Client $client)
     {
-        if (Auth::user()->type == "client") {
-            $this->authorize('update', $client);
-            $client->update($request->all());
-            return $client;
-        }
-        if (Auth::user()->type == "admin") {
-            $client->update($request->all());
-            return $client;
-        }
-        return "Não está autorizado a editar este cliente";
+        $this->authorize('update', $client);
+        $client->update($request->all());
+        return $client;
     }
 
     public function destroy(Client $client)
     {
-        if (Auth::user()->type == "client") {
-            $this->authorize('delete', $client);
-            $client->delete();
-        }
-        if (Auth::user()->type == "admin") {
-            $client->delete();
-        }
-        return "Não está autorizado a excluir este cliente";
+        $this->authorize('delete', $client);
+        return $client->delete();
     }
 }

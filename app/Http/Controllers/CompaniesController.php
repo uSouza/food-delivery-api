@@ -15,57 +15,29 @@ class CompaniesController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', Company::class);
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
         Company::create($data);
-
     }
 
     public function show(Company $company)
     {
-        $this->authorize('update', $company);
+        $this->authorize('view', $company);
         return $company;
     }
 
     public function update(Request $request, Company $company)
     {
-        if (Auth::user()->type == "client") {
-            $this->authorize('update', $company);
-            $company->update($request->all());
-            return $company;
-        }
-        if (Auth::user()->type == "admin") {
-            $company->update($request->all());
-            return $company;
-        }
-        return "Não está autorizado a editar esta empresa";
+        $this->authorize('update', $company);
+        $company->update($request->all());
+        return $company;
     }
 
     public function destroy(Company $company)
     {
-        if (Auth::user()->type == "client") {
-            $this->authorize('delete', $company);
-            $company->delete();
-            return $company;
-        }
-        if (Auth::user()->type == "admin") {
-            $company->delete();
-            return $company;
-        }
-        return "Não está autorizado a excluir esta empresa";
-    }
-
-    public function upload(Company $company, Request $request)
-    {
-        $url = $request->file('url');
-        $ext = ['jpg', 'png', 'gif', 'jpeg'];
-        $url_ext = $url->extension();
-        if ($url->isValid() and in_array($url_ext, $ext)) {
-            $filename = $company->id . '-' . $company->social_name;
-            $url->storeAs('img/companies', $filename);
-            return "img/companies/" . $filename . $url_ext;
-        }
-        return null;
+        $this->authorize('delete', $company);
+        return $company->delete();
     }
 
 }

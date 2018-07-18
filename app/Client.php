@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Client extends Model
 {
-    protected $fillable = ['name', 'phone', 'cell_phone', 'user_id'];
+    protected $fillable = ['name', 'phone', 'cell_phone', 'user_id', 'cpf'];
     protected $dates = ['deleted_at'];
     use SoftDeletes;
 
