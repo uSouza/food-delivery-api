@@ -98,6 +98,155 @@ class DatabaseSeeder extends Seeder
             'deliver' => 0,
             'created_at' => \Carbon\Carbon::now()
         ]);
-
+        DB::table('ingredient_groups')->insert([
+            'name' => 'Geral'
+        ]);
+        DB::table('ingredient_groups')->insert([
+            'name' => 'Guarnição',
+            'number_options' => 3
+        ]);
+        DB::table('ingredient_groups')->insert([
+            'name' => 'Principal',
+            'number_options' => 1
+        ]);
+        DB::table('ingredient_groups')->insert([
+            'name' => 'Acompanhamento',
+            'number_options' => 2
+        ]);
+        DB::table('ingredients')->insert([
+            'ingredient_group_id' => 4,
+            'name' => 'Arroz'
+        ]);
+        DB::table('ingredients')->insert([
+            'ingredient_group_id' => 4,
+            'name' => 'Feijão'
+        ]);
+        DB::table('ingredients')->insert([
+            'ingredient_group_id' => 3,
+            'name' => 'Carne bovina'
+        ]);
+        DB::table('ingredients')->insert([
+            'ingredient_group_id' => 3,
+            'name' => 'Carne suína'
+        ]);
+        DB::table('ingredients')->insert([
+            'ingredient_group_id' => 2,
+            'name' => 'Panqueca'
+        ]);
+        DB::table('ingredients')->insert([
+            'ingredient_group_id' => 2,
+            'name' => 'Lasanha'
+        ]);
+        DB::table('ingredients')->insert([
+            'ingredient_group_id' => 2,
+            'name' => 'Linguiça'
+        ]);
+        DB::table('products')->insert([
+            'company_id' => 1,
+            'type' => 'marmita',
+            'description' => 'Pedido de marmita',
+            'size' => 'M',
+            'measure' => 'UN',
+            'date' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now()
+        ]);
+        DB::table('products')->insert([
+            'company_id' => 1,
+            'type' => 'marmita',
+            'description' => 'Pedido de marmita',
+            'size' => 'P',
+            'measure' => 'UN',
+            'date' => \Carbon\Carbon::now(),
+            'created_at' => \Carbon\Carbon::now()
+        ]);
+        DB::table('ingredient_product')->insert([
+            'product_id' => 1,
+            'ingredient_id' => 1
+        ]);
+        DB::table('ingredient_product')->insert([
+            'product_id' => 1,
+            'ingredient_id' => 2
+        ]);
+        DB::table('ingredient_product')->insert([
+            'product_id' => 1,
+            'ingredient_id' => 3
+        ]);
+        DB::table('ingredient_product')->insert([
+            'product_id' => 1,
+            'ingredient_id' => 4
+        ]);
+        DB::table('ingredient_product')->insert([
+            'product_id' => 1,
+            'ingredient_id' => 5
+        ]);
+        DB::table('ingredient_product')->insert([
+            'product_id' => 2,
+            'ingredient_id' => 1
+        ]);
+        DB::table('ingredient_product')->insert([
+            'product_id' => 2,
+            'ingredient_id' => 2
+        ]);
+        DB::table('ingredient_product')->insert([
+            'product_id' => 2,
+            'ingredient_id' => 3
+        ]);
+        DB::table('ingredient_product')->insert([
+            'product_id' => 2,
+            'ingredient_id' => 4
+        ]);
+        DB::table('ingredient_product')->insert([
+            'product_id' => 2,
+            'ingredient_id' => 5
+        ]);
+        DB::table('prices')->insert([
+            'size' => 'P',
+            'price' => 10,
+            'created_at' => \Carbon\Carbon::now()
+        ]);
+        DB::table('prices')->insert([
+            'size' => 'M',
+            'price' => 12,
+            'created_at' => \Carbon\Carbon::now()
+        ]);
+        DB::table('prices')->insert([
+            'size' => 'G',
+            'price' => 15,
+            'created_at' => \Carbon\Carbon::now()
+        ]);
+        DB::table('prices')->insert([
+            'size' => 'Fitness',
+            'price' => 12.5,
+            'created_at' => \Carbon\Carbon::now()
+        ]);
+        DB::table('prices')->insert([
+            'size' => 'Especial',
+            'price' => 14,
+            'created_at' => \Carbon\Carbon::now()
+        ]);
+        DB::table('price_product')->insert([
+            'product_id' => 1,
+            'price_id' => 2
+        ]);
+        DB::table('price_product')->insert([
+            'product_id' => 2,
+            'price_id' => 3
+        ]);
+        DB::table('tags')->insert([
+            'name' => 'Chinesa',
+            'created_at' => \Carbon\Carbon::now()
+        ]);
+        DB::table('tags')->insert([
+            'name' => 'Feijoada',
+            'created_at' => \Carbon\Carbon::now()
+        ]);
+        DB::table('product_tag')->insert([
+            'product_id' => 1,
+            'tag_id' => 1
+        ]);
+        DB::table('product_tag')->insert([
+            'product_id' => 2,
+            'tag_id' => 2
+        ]);
     }
 }

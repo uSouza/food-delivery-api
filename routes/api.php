@@ -33,5 +33,6 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
         'orders' => 'OrdersController',
         'prices' => 'PricesController',
         'status' => 'StatusController',
+        'ingredient_groups' => 'IngredientGroupsController'
     ]);
 });

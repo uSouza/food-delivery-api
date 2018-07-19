@@ -15,10 +15,7 @@ class FormPaymentsController extends Controller
 
     public function store(Request $request)
     {
-        if (Auth::user()->type == "admin") {
-            return FormPayment::create($request->all());
-        }
-        return "Este usuario não pode cadastrar formas de pagamento";
+        return FormPayment::create($request->all());
     }
 
     public function show(FormPayment $form_payment)
