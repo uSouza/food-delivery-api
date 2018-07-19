@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Company;
+use App\Observers\OrderObserver;
+use App\Order;
 use App\User;
 use App\Observers\CompanyObserver;
 use App\Observers\UserObserver;
@@ -18,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Company::observe(CompanyObserver::class);
-        User::observe(UserObserver::class);
+        Order::observe(OrderObserver::class);
     }
 
     /**
