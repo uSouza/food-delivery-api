@@ -27,7 +27,7 @@ class OrderPolicy
 
     public function view(User $user, Order $order)
     {
-        return $user->id === $company->user_id;
+        return $user->id === $order->user_id;
     }
 
     /**
