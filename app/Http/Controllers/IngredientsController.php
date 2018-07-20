@@ -15,25 +15,26 @@ class IngredientsController extends Controller
 
     public function store(Request $request)
     {
-        if (Auth::user()->type == "admin") {
-            return Ingredient::create($request->all());
-        }
-        return "Este usuario não pode cadastrar ingredientes";
+        $this->authorize('create', Ingredient::class);
+        return Ingredient::create($request->all());
     }
 
     public function show(Ingredient $ingredient)
     {
+        $this->authorize('view', $ingredient);
         return $ingredient;
     }
 
     public function update(Request $request, Ingredient $ingredient)
     {
+        $this->authorize('update', $ingredient);
         $ingredient->update($request->all());
         return $ingredient;
     }
 
     public function destroy(Ingredient $ingredient)
     {
+        $this->authorize('delete', $ingredient);
         $ingredient->delete();
         return $ingredient;
     }

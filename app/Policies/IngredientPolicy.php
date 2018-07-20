@@ -3,18 +3,18 @@
 namespace App\Policies;
 
 use App\User;
-use App\FormPayment;
+use App\Ingredient;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class FormPaymentPolicy
+class IngredientPolicy
 {
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view the formPayment.
+     * Determine whether the user can view the ingredient.
      *
      * @param  \App\User  $user
-     * @param  \App\FormPayment  $formPayment
+     * @param  \App\Ingredient  $ingredient
      * @return mixed
      */
     public function before($user, $ability)
@@ -24,13 +24,13 @@ class FormPaymentPolicy
         }
     }
 
-    public function view(User $user, FormPayment $formPayment)
+    public function view(User $user, Ingredient $ingredient)
     {
         return true;
     }
 
     /**
-     * Determine whether the user can create formPayments.
+     * Determine whether the user can create ingredients.
      *
      * @param  \App\User  $user
      * @return mixed
@@ -41,25 +41,25 @@ class FormPaymentPolicy
     }
 
     /**
-     * Determine whether the user can update the formPayment.
+     * Determine whether the user can update the ingredient.
      *
      * @param  \App\User  $user
-     * @param  \App\FormPayment  $formPayment
+     * @param  \App\Ingredient  $ingredient
      * @return mixed
      */
-    public function update(User $user, FormPayment $formPayment)
+    public function update(User $user, Ingredient $ingredient)
     {
         return false;
     }
 
     /**
-     * Determine whether the user can delete the formPayment.
+     * Determine whether the user can delete the ingredient.
      *
      * @param  \App\User  $user
-     * @param  \App\FormPayment  $formPayment
+     * @param  \App\Ingredient  $ingredient
      * @return mixed
      */
-    public function delete(User $user, FormPayment $formPayment)
+    public function delete(User $user, Ingredient $ingredient)
     {
         return false;
     }

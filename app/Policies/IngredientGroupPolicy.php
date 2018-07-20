@@ -26,7 +26,7 @@ class IngredientGroupPolicy
 
     public function view(User $user, IngredientGroup $ingredientGroup)
     {
-        return $user->type === "company";
+        return true;
     }
 
     /**
