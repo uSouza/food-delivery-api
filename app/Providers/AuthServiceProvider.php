@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Client;
 use App\Company;
 use App\FormPayment;
+use App\IngredientGroup;
 use App\Order;
 use App\Policies\ClientPolicy;
 use App\Policies\CompanyPolicy;
@@ -26,7 +27,8 @@ class AuthServiceProvider extends ServiceProvider
         Company::class => CompanyPolicy::class,
         Client::class => ClientPolicy::class,
         Order::class => OrderPolicy::class,
-        FormPayment::class => FormPaymentPolicy::class
+        FormPayment::class => FormPaymentPolicy::class,
+        IngredientGroup::class => IngredientGroup::class,
     ];
 
     /**
