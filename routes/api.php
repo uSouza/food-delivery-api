@@ -35,5 +35,6 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
         'ingredient_groups' => 'IngredientGroupsController',
         'clients_locations' => 'ClientsLocationsController',
         'companies_locations' => 'CompaniesLocationsController',
+        'order_evaluations' => 'OrderEvaluationsController',
     ]);
 });

@@ -50,4 +50,9 @@ class Order extends Model
         return $this->hasMany(OrderStatus::class);
     }
 
+    public function order_evaluations()
+    {
+        return $this->hasOne(OrderEvaluation::class);
+    }
+
 }
