@@ -36,5 +36,6 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
         'clients_locations' => 'ClientsLocationsController',
         'companies_locations' => 'CompaniesLocationsController',
         'order_evaluations' => 'OrderEvaluationsController',
+        'worked_days' => 'WorkedDaysController',
     ]);
 });

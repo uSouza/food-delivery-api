@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Http\Requests\CompaniesRequest as Request;
+use App\WorkedDays;
 use Illuminate\Support\Facades\Auth;
 
 class CompaniesController extends Controller
@@ -18,7 +19,9 @@ class CompaniesController extends Controller
         $this->authorize('create', Company::class);
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
-        Company::create($data);
+        $company = Company::create($data);
+
+        return $company;
     }
 
     public function show(Company $company)

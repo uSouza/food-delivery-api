@@ -56,6 +56,12 @@ class DatabaseSeeder extends Seeder
         DB::table('statuses')->insert([
             'name' => 'closed'
         ]);
+        DB::table('statuses')->insert([
+            'name' => 'refused'
+        ]);
+        DB::table('statuses')->insert([
+            'name' => 'refused'
+        ]);
         DB::table('form_payments')->insert([
             'description' => 'A vista'
         ]);
