@@ -21,7 +21,6 @@ class FormPaymentsController extends Controller
 
     public function show(FormPayment $form_payment)
     {
-        $this->authorize('view', $form_payment);
         return $form_payment;
     }
 

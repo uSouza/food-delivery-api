@@ -20,7 +20,6 @@ class IngredientGroupsController extends Controller
 
     public function show(IngredientGroup $ingredient_group)
     {
-        $this->authorize('view', $ingredient_group);
         return $ingredient_group;
     }
 

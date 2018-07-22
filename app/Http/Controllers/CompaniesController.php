@@ -23,7 +23,6 @@ class CompaniesController extends Controller
 
     public function show(Company $company)
     {
-        $this->authorize('view', $company);
         return $company;
     }
 

@@ -39,6 +39,14 @@ class User extends Authenticatable
         return $this->type === "admin";
     }
 
+    public function findClientByUser() {
+        return Client::where('user_id', $this->id)->first();
+    }
+
+    public function findCompanyByUser() {
+        return Company::where('user_id', $this->id)->first();
+    }
+
     protected $dispatchesEvents = [
       'created' => \App\Events\UserCreatedEvent::class
     ];

@@ -21,7 +21,6 @@ class IngredientsController extends Controller
 
     public function show(Ingredient $ingredient)
     {
-        $this->authorize('view', $ingredient);
         return $ingredient;
     }
 

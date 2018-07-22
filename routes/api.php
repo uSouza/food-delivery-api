@@ -28,11 +28,12 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
         'form_payments' => 'FormPaymentsController',
         'products' => 'ProductsController',
         'ingredients' => 'IngredientsController',
-        'locations' => 'LocationsController',
         'tags' => 'TagsController',
         'orders' => 'OrdersController',
         'prices' => 'PricesController',
         'status' => 'StatusController',
-        'ingredient_groups' => 'IngredientGroupsController'
+        'ingredient_groups' => 'IngredientGroupsController',
+        'clients_locations' => 'ClientsLocationsController',
+        'companies_locations' => 'CompaniesLocationsController',
     ]);
 });

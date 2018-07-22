@@ -7,11 +7,13 @@ use App\Company;
 use App\FormPayment;
 use App\Ingredient;
 use App\IngredientGroup;
+use App\Location;
 use App\Order;
 use App\Policies\ClientPolicy;
 use App\Policies\CompanyPolicy;
 use App\Policies\FormPaymentPolicy;
 use App\Policies\IngredientPolicy;
+use App\Policies\LocationPolicy;
 use App\Policies\OrderPolicy;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
@@ -31,7 +33,7 @@ class AuthServiceProvider extends ServiceProvider
         Order::class => OrderPolicy::class,
         FormPayment::class => FormPaymentPolicy::class,
         IngredientGroup::class => IngredientGroup::class,
-        IngredientPolicy::class => Ingredient::class,
+        IngredientPolicy::class => Ingredient::class
     ];
 
     /**
