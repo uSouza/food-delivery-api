@@ -91,6 +91,7 @@ class DatabaseSeeder extends Seeder
             'price' => 10,
             'observation' => 'order test',
             'deliver' => 0,
+            'receive_at' => \Carbon\Carbon::now()->toTimeString(),
             'created_at' => \Carbon\Carbon::now()
         ]);
         DB::table('orders')->insert([
@@ -253,6 +254,24 @@ class DatabaseSeeder extends Seeder
         DB::table('product_tag')->insert([
             'product_id' => 2,
             'tag_id' => 2
+        ]);
+        DB::table('worked_days')->insert([
+            'company_id' => 1,
+            'monday' => true,
+            'sunday' => true,
+            'tuesday' => true,
+            'wednesday' => true,
+            'thursday' => true,
+            'friday' => true,
+            'saturday' => true
+        ]);
+        DB::table('order_evaluations')->insert([
+            'order_id' => 1,
+            'note' => 4,
+        ]);
+        DB::table('order_evaluations')->insert([
+            'order_id' => 2,
+            'note' => 5,
         ]);
     }
 }

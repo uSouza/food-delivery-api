@@ -14,6 +14,8 @@ class CreateIngredientsTable extends Migration
             $table->integer('ingredient_group_id');
             $table->string('name');
             $table->timestamps();
+            $table->foreign('ingredient_group_id')->references('id')
+                ->on('ingredient_groups')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

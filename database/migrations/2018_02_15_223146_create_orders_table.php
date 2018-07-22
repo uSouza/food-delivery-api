@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->float('price');
             $table->string('observation')->nullable();
             $table->boolean('deliver');
+            $table->time('receive_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('client_id')->references('id')
@@ -45,6 +46,7 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('order_evaluations');
         Schema::dropIfExists('orders');
     }
 }

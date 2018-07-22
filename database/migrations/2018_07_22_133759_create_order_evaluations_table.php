@@ -18,6 +18,8 @@ class CreateOrderEvaluationsTable extends Migration
             $table->integer('order_id');
             $table->integer('note');
             $table->timestamps();
+            $table->foreign('order_id')->references('id')
+                ->on('orders')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

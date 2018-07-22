@@ -24,6 +24,8 @@ class CreateWorkedDaysTable extends Migration
             $table->boolean('friday');
             $table->boolean('saturday');
             $table->timestamps();
+            $table->foreign('company_id')->references('id')
+                ->on('companies')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
