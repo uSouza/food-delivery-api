@@ -15,10 +15,7 @@ class TagsController extends Controller
 
     public function store(Request $request)
     {
-        if (Auth::user()->type == "admin") {
-            return Tag::create($request->all());
-        }
-        return "Este usuario não pode cadastrar tags";
+        return Tag::create($request->all());
     }
 
     public function show(Tag $tag)

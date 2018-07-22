@@ -273,5 +273,29 @@ class DatabaseSeeder extends Seeder
             'order_id' => 2,
             'note' => 5,
         ]);
+        DB::table('additionals')->insert([
+            'name' => 'Refrigerante'
+        ]);
+        DB::table('additionals')->insert([
+            'name' => 'Carne'
+        ]);
+        DB::table('additional_company')->insert([
+            'company_id' => 1,
+            'additional_id' => 1,
+            'value' => 6.5
+        ]);
+        DB::table('additional_company')->insert([
+            'company_id' => 1,
+            'additional_id' => 2,
+            'value' => 1.5
+        ]);
+        DB::table('additional_order')->insert([
+            'order_id' => 1,
+            'additional_id' => 2
+        ]);
+        DB::table('additional_order')->insert([
+            'order_id' => 2,
+            'additional_id' => 1
+        ]);
     }
 }

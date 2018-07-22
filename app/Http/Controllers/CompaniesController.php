@@ -6,6 +6,7 @@ use App\Company;
 use App\Http\Requests\CompaniesRequest as Request;
 use App\WorkedDays;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CompaniesController extends Controller
 {
@@ -20,7 +21,13 @@ class CompaniesController extends Controller
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
         $company = Company::create($data);
-
+        for($i = 0; $i < count($data['additionals']); $i++) {
+            DB::table('additional_company')->insert([
+                'company_id' => $company->id,
+                'additional_id' => $data['additionals'][$i]['add_id'],
+                'value' => $data['additionals'][$i]['add_value'],
+            ]);
+        }
         return $company;
     }
 
@@ -33,12 +40,22 @@ class CompaniesController extends Controller
     {
         $this->authorize('update', $company);
         $company->update($request->all());
+        $data = $request->all();
+        DB::table('additional_company')->where('company_id', $company->id)->delete();
+        for($i = 0; $i < count($data['additionals']); $i++) {
+            DB::table('additional_company')->insert([
+                'company_id' => $company->id,
+                'additional_id' => $data['additionals'][$i]['add_id'],
+                'value' => $data['additionals'][$i]['add_value'],
+            ]);
+        }
         return $company;
     }
 
     public function destroy(Company $company)
     {
         $this->authorize('delete', $company);
+        DB::table('additional_company')->where('company_id', $company->id)->delete();
         return $company->delete();
     }
 

@@ -23,6 +23,10 @@ class Company extends Model
     {
         return $this->hasMany(Product::class);
     }
+    public function additionals()
+    {
+        return $this->hasMany(Additional::class);
+    }
     public function locations()
     {
         return $this->belongsToMany(Location::class);

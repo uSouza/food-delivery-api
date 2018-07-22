@@ -24,7 +24,7 @@ class CompanyPolicy
 
     public function create(User $user)
     {
-        //
+        return $user->type === "company";
     }
 
     public function update(User $user, Company $company)
