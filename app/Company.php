@@ -25,7 +25,7 @@ class Company extends Model
     }
     public function additionals()
     {
-        return $this->hasMany(Additional::class);
+        return $this->belongsToMany(Additional::class);
     }
     public function locations()
     {
