@@ -29,6 +29,12 @@ class DatabaseSeeder extends Seeder
             'type' => 'company',
             'password' => bcrypt('pandeco2018')
         ]);
+        DB::table('users')->insert([
+            'name' => 'guest',
+            'email' => 'guest@pandeco.com.br',
+            'type' => 'guest',
+            'password' => bcrypt('pandeco2018')
+        ]);
         DB::table('clients')->insert([
             'user_id' => 2,
             'name' => 'client test',

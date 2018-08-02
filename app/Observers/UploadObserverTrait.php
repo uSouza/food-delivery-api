@@ -32,6 +32,8 @@ trait UploadObserverTrait
         $name = bin2hex(openssl_random_pseudo_bytes(8));
         $name = $name . '.' . $extension;
         $model->$field->storeAs($this->path, $name);
-        $model->$field = $name;
+        $url = $this->path.'/'.$name;
+        $file = file_get_contents($url);
+        $model->$field = 'data:image/'.$extension.';base64,'.base64_encode($file);
     }
 }

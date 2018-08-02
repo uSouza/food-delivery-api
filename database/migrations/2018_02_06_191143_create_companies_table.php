@@ -24,7 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->string('phone');
             $table->string('cell_phone')->nullable();
             $table->integer('order_limit');
-            $table->string('url')->nullable();
+            $table->text('url')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')

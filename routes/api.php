@@ -20,6 +20,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::get('users/me', function () {
        return request()->user();
     });
+    Route::get('/image/{image_name}', 'GetImageController@getImage');
     Route::get('/interest', 'InterestsController@count');
     Route::resources([
         'clients' => 'ClientsController',
