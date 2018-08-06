@@ -51,7 +51,9 @@ class DatabaseSeeder extends Seeder
             'fantasy_name' => 'company test',
             'phone' => '(45)99815-8232',
             'order_limit' => 2,
-            'cell_phone' => '(45)99815-8232'
+            'cell_phone' => '(45)99815-8232',
+            'opening_time' => '11:00:00',
+            'observation' => 'Mussum Ipsum, cacilds vidis litro abertis. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.'
         ]);
         DB::table('statuses')->insert([
             'name' => 'pending'
@@ -156,19 +158,13 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             'company_id' => 1,
-            'type' => 'marmita',
             'description' => 'Pedido de marmita',
-            'size' => 'M',
-            'measure' => 'UN',
             'date' => \Carbon\Carbon::now(),
             'created_at' => \Carbon\Carbon::now()
         ]);
         DB::table('products')->insert([
             'company_id' => 1,
-            'type' => 'marmita',
             'description' => 'Pedido de marmita',
-            'size' => 'P',
-            'measure' => 'UN',
             'date' => \Carbon\Carbon::now(),
             'created_at' => \Carbon\Carbon::now()
         ]);
@@ -252,14 +248,6 @@ class DatabaseSeeder extends Seeder
         DB::table('tags')->insert([
             'name' => 'Feijoada',
             'created_at' => \Carbon\Carbon::now()
-        ]);
-        DB::table('product_tag')->insert([
-            'product_id' => 1,
-            'tag_id' => 1
-        ]);
-        DB::table('product_tag')->insert([
-            'product_id' => 2,
-            'tag_id' => 2
         ]);
         DB::table('worked_days')->insert([
             'company_id' => 1,

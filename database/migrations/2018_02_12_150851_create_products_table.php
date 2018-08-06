@@ -16,10 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id');
-            $table->enum('type', ['marmita', 'bebida']);
             $table->string('description')->nullable();
-            $table->enum('measure', ['UN', 'M', 'CM', 'L', 'ML']);
-            $table->char('size')->nullable();
             $table->date('date');
             $table->timestamps();
             $table->softDeletes();

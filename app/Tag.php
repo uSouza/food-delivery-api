@@ -8,8 +8,8 @@ class Tag extends Model
 {
     protected $fillable = ['name'];
 
-    public function products()
+    public function companies()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Company::class);
     }
 }

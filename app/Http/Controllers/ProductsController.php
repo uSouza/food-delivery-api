@@ -9,37 +9,36 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        return Product::all();
+        return Product::with(['prices', 'ingredients'])->get();
     }
 
     public function store(Request $request)
     {
         $ingredients_ids = $request->input('ingredients_ids');
-        $tags_ids = $request->input('tags_ids');
+        $prices_ids = $request->input('prices_ids');
         $product = Product::create([
-            'type' => $request->input('type'),
             'description' => $request->input('description'),
-            'measure' => $request->input('measure'),
-            'size' => $request->input('size'),
-            'company_id' => $request->input('company_id')
+            'company_id' => $request->input('company_id'),
+            'date' => $request->input('date'),
         ]);
         $product->ingredients()->attach($ingredients_ids);
-        $product->tags()->attach($tags_ids);
+        $product->prices()->attach($prices_ids);
         return $product;
     }
 
-    public function show(Product $product)
+    public function show($id)
     {
-        return $product;
+        dd(Product::find($id)->with(['prices', 'ingredients'])->get());
+        return Product::find($id)->with(['prices', 'ingredients'])->first();
     }
 
     public function update(Request $request, Product $product)
     {
         $ingredients_ids = $request->input('ingredients_ids');
-        $tags_ids = $request->input('tags_ids');
+        $prices_ids = $request->input('prices_ids');
         $product->update($request->all());
         $product->ingredients()->attach($ingredients_ids);
-        $product->tags()->attach($tags_ids);
+        $product->prices()->attach($prices_ids);
         return $product;
     }
 
@@ -47,6 +46,7 @@ class ProductsController extends Controller
     {
         $product->ingredients()->detach();
         $product->tags()->detach();
+        $product->prices()->detach();
         $product->delete();
     }
 }

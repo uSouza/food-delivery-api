@@ -13,13 +13,24 @@ class CompaniesController extends Controller
 
     public function index()
     {
-        return Company::all();
+        return Company::with(['tags', 'additionals', 'products'])->get();
+    }
+
+    public function getAdditionalsFromCompany($id)
+    {
+        $company = Company::findOrFail($id);
+        return DB::table('additional_company')
+                ->join('additionals', 'additional_company.additional_id', '=', 'additionals.id')
+                ->select('additionals.name', 'additional_company.*')
+                ->where('additional_company.company_id', $company->id)
+                ->get();
     }
 
     public function store(Request $request)
     {
         $this->authorize('create', Company::class);
-        $data = $request->all();
+        $tags_ids = $request->input('tags_ids');
+        $data = $request->except('tags_ids');
         $data['user_id'] = Auth::user()->id;
         $company = Company::create($data);
         if (! empty($data['additionals'])) {
@@ -31,11 +42,13 @@ class CompaniesController extends Controller
                 ]);
             }
         }
+        $company->tags()->attach($tags_ids);
         return $company;
     }
 
-    public function show(Company $company)
+    public function show($id)
     {
+        $company = Company::find($id)->with(['tags', 'additionals', 'products'])->first();
         $this->authorize('view', $company);
         return $company;
     }
@@ -55,6 +68,9 @@ class CompaniesController extends Controller
                 ]);
             }
         }
+        if (! empty($data['tags_ids'])) {
+            $company->tags()->attach($data['tags_ids']);
+        }
         return $company;
     }
 
@@ -62,6 +78,7 @@ class CompaniesController extends Controller
     {
         $this->authorize('delete', $company);
         DB::table('additional_company')->where('company_id', $company->id)->delete();
+        DB::table('company_tag')->where('company_id', $company->id)->delete();
         $company->delete();
         return $company;
     }

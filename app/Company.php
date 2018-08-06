@@ -10,7 +10,8 @@ class Company extends Model
     protected $fillable = [
         'social_name', 'fantasy_name', 'cell_phone',
         'phone', 'cnpj', 'responsible_name',
-        'responsible_phone', 'user_id', 'url', 'order_limit'
+        'responsible_phone', 'user_id', 'observation',
+        'url', 'order_limit', 'opening_time', 'tags_ids'
     ];
     protected $dates = ['deleted_at'];
     use SoftDeletes;
@@ -34,6 +35,10 @@ class Company extends Model
     public function workedDays()
     {
         return $this->hasOne(WorkedDays::class);
+    }
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 
 }
