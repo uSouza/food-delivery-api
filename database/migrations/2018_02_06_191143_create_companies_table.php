@@ -26,6 +26,7 @@ class CreateCompaniesTable extends Migration
             $table->integer('order_limit');
             $table->string('observation')->nullable();
             $table->time('opening_time');
+            $table->double('delivery_value')->nullable();
             $table->string('url')->nullable();
             $table->text('image_base64')->nullable();
             $table->timestamps();

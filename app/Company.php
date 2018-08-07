@@ -20,22 +20,27 @@ class Company extends Model
     {
         return $this->hasMany(Order::class);
     }
-    public function products()
+
+    public function menus()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Menu::class);
     }
+
     public function additionals()
     {
         return $this->belongsToMany(Additional::class);
     }
+
     public function locations()
     {
         return $this->belongsToMany(Location::class);
     }
+
     public function workedDays()
     {
         return $this->hasOne(WorkedDays::class);
     }
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class);

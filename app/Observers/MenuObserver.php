@@ -2,28 +2,28 @@
 
 namespace App\Observers;
 
-use App\Company;
+use App\Menu;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-class CompanyObserver
+class MenuObserver
 {
     use UploadObserverTrait;
 
     protected $field = 'url';
-    protected $path = 'img/companies/';
+    protected $path = 'img/menus/';
 
-    public function creating(Company $model)
+    public function creating(Menu $model)
     {
         $this->sendFile($model);
     }
 
-    public function deleting(Company $model)
+    public function deleting(Menu $model)
     {
         $this->removeFile($model);
     }
 
-    public function updating(Company $model)
+    public function updating(Menu $model)
     {
         $this->updateFile($model);
     }

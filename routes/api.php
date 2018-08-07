@@ -22,7 +22,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     });
     Route::get('/interest', 'InterestsController@count');
     Route::get('/additionals_company/{id}', 'CompaniesController@getAdditionalsFromCompany');
-    Route::get('/products/company/{id}', 'ProductsController@productsByCompany');
+    Route::get('/products/menu/{id}', 'ProductsController@productsByMenu');
     Route::resources([
         'clients' => 'ClientsController',
         'users' => 'UsersController',
@@ -40,5 +40,6 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
         'order_evaluations' => 'OrderEvaluationsController',
         'worked_days' => 'WorkedDaysController',
         'additionals' => 'AdditionalsController',
+        'menus' => 'MenusController',
     ]);
 });
