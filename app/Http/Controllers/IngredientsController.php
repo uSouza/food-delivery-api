@@ -10,7 +10,7 @@ class IngredientsController extends Controller
 {
     public function index()
     {
-        return Ingredient::all();
+        return Ingredient::with('ingredient_group')->get();
     }
 
     public function store(Request $request)

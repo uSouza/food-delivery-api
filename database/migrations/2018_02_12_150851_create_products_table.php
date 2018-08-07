@@ -16,7 +16,8 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id');
-            $table->string('description')->nullable();
+            $table->string('description');
+            $table->string('observation')->nullable();
             $table->date('date');
             $table->timestamps();
             $table->softDeletes();

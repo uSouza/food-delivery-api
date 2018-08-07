@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use App\Product;
 use App\Http\Requests\ProductsRequest as Request;
 
@@ -28,8 +29,12 @@ class ProductsController extends Controller
 
     public function show($id)
     {
-        dd(Product::find($id)->with(['prices', 'ingredients'])->get());
         return Product::find($id)->with(['prices', 'ingredients'])->first();
+    }
+
+    public function productsByCompany($id)
+    {
+        return Product::where('company_id', $id)->with(['prices', 'ingredients'])->get();
     }
 
     public function update(Request $request, Product $product)

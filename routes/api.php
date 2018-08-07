@@ -22,6 +22,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     });
     Route::get('/interest', 'InterestsController@count');
     Route::get('/additionals_company/{id}', 'CompaniesController@getAdditionalsFromCompany');
+    Route::get('/products/company/{id}', 'ProductsController@productsByCompany');
     Route::resources([
         'clients' => 'ClientsController',
         'users' => 'UsersController',

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    protected $fillable = ['type', 'description', 'measure', 'date', 'company_id', 'ingredients_ids'];
+    protected $fillable = ['type', 'description', 'measure', 'date', 'observation', 'company_id', 'ingredients_ids'];
     protected $dates = ['deleted_at'];
     use SoftDeletes;
 
