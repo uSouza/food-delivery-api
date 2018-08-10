@@ -13,7 +13,7 @@ class CompaniesController extends Controller
 
     public function index()
     {
-        return Company::with(['tags', 'additionals', 'products'])->get();
+        return Company::with(['tags', 'additionals', 'menus', 'ingredient_groups'])->get();
     }
 
     public function getAdditionalsFromCompany($id)
@@ -42,13 +42,22 @@ class CompaniesController extends Controller
                 ]);
             }
         }
+        if (! empty($data['ingredient_groups'])) {
+            for ($i = 0; $i < count($data['ingredient_groups']); $i++) {
+                DB::table('company_ingredient_group')->insert([
+                    'company_id' => $company->id,
+                    'ingredient_group_id' => $data['ingredient_groups'][$i]['group_id'],
+                    'additional_value' => $data['ingredient_groups'][$i]['group_value'],
+                ]);
+            }
+        }
         $company->tags()->attach($tags_ids);
         return $company;
     }
 
     public function show($id)
     {
-        $company = Company::find($id)->with(['tags', 'additionals', 'products'])->first();
+        $company = Company::find($id)->with(['tags', 'additionals', 'menus'])->first();
         $this->authorize('view', $company);
         return $company;
     }
@@ -68,6 +77,15 @@ class CompaniesController extends Controller
                 ]);
             }
         }
+        if (! empty($data['ingredient_groups'])) {
+            for ($i = 0; $i < count($data['ingredient_groups']); $i++) {
+                DB::table('company_ingredient_group')->insert([
+                    'company_id' => $company->id,
+                    'ingredient_group_id' => $data['ingredient_groups'][$i]['group_id'],
+                    'additional_value' => $data['ingredient_groups'][$i]['group_value'],
+                ]);
+            }
+        }
         if (! empty($data['tags_ids'])) {
             $company->tags()->attach($data['tags_ids']);
         }
@@ -78,6 +96,7 @@ class CompaniesController extends Controller
     {
         $this->authorize('delete', $company);
         DB::table('additional_company')->where('company_id', $company->id)->delete();
+        DB::table('company_ingredient_group')->where('company_id', $company->id)->delete();
         DB::table('company_tag')->where('company_id', $company->id)->delete();
         $company->delete();
         return $company;

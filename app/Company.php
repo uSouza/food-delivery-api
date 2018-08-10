@@ -46,4 +46,9 @@ class Company extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function ingredient_groups()
+    {
+        return $this->belongsToMany(IngredientGroup::class);
+    }
+
 }

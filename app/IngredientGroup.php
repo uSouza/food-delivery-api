@@ -12,4 +12,9 @@ class IngredientGroup extends Model
     {
         return $this->hasMany(Ingredient::class);
     }
+
+    public function companies()
+    {
+        return $this->belongsToMany(Company::class);
+    }
 }

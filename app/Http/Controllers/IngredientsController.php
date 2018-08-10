@@ -19,9 +19,9 @@ class IngredientsController extends Controller
         return Ingredient::create($request->all());
     }
 
-    public function show(Ingredient $ingredient)
+    public function show($id)
     {
-        return $ingredient;
+        return Ingredient::find($id)->with(['ingredient_group'])->first();
     }
 
     public function update(Request $request, Ingredient $ingredient)

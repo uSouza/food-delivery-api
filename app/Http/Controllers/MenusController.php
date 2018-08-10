@@ -27,6 +27,11 @@ class MenusController extends Controller
         return Menu::find($id)->with(['prices', 'ingredients'])->first();
     }
 
+    public function menusByCompany($id)
+    {
+        return Menu::where('company_id', $id)->with(['prices', 'ingredients'])->get();
+    }
+
     public function update(Request $request, Menu $menu)
     {
         $ingredients_ids = $request->input('ingredients_ids');
