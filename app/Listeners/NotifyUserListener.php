@@ -26,7 +26,6 @@ class NotifyUserListener
      */
     public function handle(UserCreatedEvent $event)
     {
-        var_dump('Creating');
         \Mail::to($event->user)->send(new \App\Mail\UserRegistered($event->user));
     }
 }

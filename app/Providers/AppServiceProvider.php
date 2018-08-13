@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Company;
+use App\Contact;
 use App\Menu;
+use App\Observers\ContactObserver;
 use App\Observers\MenuObserver;
 use App\Observers\OrderObserver;
 use App\Order;
@@ -24,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         Company::observe(CompanyObserver::class);
         Order::observe(OrderObserver::class);
         Menu::observe(MenuObserver::class);
+        Contact::observe(ContactObserver::class);
     }
 
     /**
