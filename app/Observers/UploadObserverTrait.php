@@ -15,6 +15,7 @@ trait UploadObserverTrait
     {
         $field = $this->field;
         Storage::delete($this->path . $model->$field);
+        $model->image_base64 = '';
     }
     protected function updateFile($model)
     {
@@ -33,5 +34,8 @@ trait UploadObserverTrait
         $name = $name . '.' . $extension;
         $model->$field->storeAs($this->path, $name);
         $model->$field = $name;
+        $url = $this->path.'/'.$name;
+        $file = file_get_contents($url);
+        $model->image_base64 = 'data:image/'.$extension.';base64,'.base64_encode($file);
     }
 }

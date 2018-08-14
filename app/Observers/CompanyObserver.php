@@ -4,7 +4,6 @@ namespace App\Observers;
 
 use App\Company;
 use Illuminate\Http\UploadedFile;
-use App\Product;
 use Illuminate\Support\Facades\Storage;
 
 class CompanyObserver

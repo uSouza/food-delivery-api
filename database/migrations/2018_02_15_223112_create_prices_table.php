@@ -15,9 +15,12 @@ class CreatePricesTable extends Migration
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('company_id');
             $table->enum('size', ['P', 'M', 'G', 'GG', 'Fitness', 'Especial']);
             $table->float('price');
             $table->timestamps();
+            $table->foreign('company_id')->references('id')
+                ->on('companies')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -28,6 +31,6 @@ class CreatePricesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prices');
+        Schema::dropIfExists('menu_price','prices');
     }
 }

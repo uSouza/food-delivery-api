@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use App\Product;
 use App\Http\Requests\ProductsRequest as Request;
 
@@ -9,44 +10,39 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        return Product::all();
+        return Product::with(['price', 'ingredients'])->get();
     }
 
     public function store(Request $request)
     {
         $ingredients_ids = $request->input('ingredients_ids');
-        $tags_ids = $request->input('tags_ids');
-        $product = Product::create([
-            'type' => $request->input('type'),
-            'description' => $request->input('description'),
-            'measure' => $request->input('measure'),
-            'size' => $request->input('size'),
-            'company_id' => $request->input('company_id')
-        ]);
+        $product = Product::create($request->except('ingredients_ids'));
         $product->ingredients()->attach($ingredients_ids);
-        $product->tags()->attach($tags_ids);
         return $product;
     }
 
-    public function show(Product $product)
+    public function show($id)
     {
-        return $product;
+        return Product::find($id)->with(['price', 'ingredients'])->first();
+    }
+
+    public function productsByMenu($id)
+    {
+        return Product::where('menu_id', $id)->with(['price', 'ingredients'])->get();
     }
 
     public function update(Request $request, Product $product)
     {
         $ingredients_ids = $request->input('ingredients_ids');
-        $tags_ids = $request->input('tags_ids');
-        $product->update($request->all());
+        $product->update($request->except('ingredients_ids'));
         $product->ingredients()->attach($ingredients_ids);
-        $product->tags()->attach($tags_ids);
         return $product;
     }
 
     public function destroy(Product $product)
     {
         $product->ingredients()->detach();
-        $product->tags()->detach();
         $product->delete();
+        return $product;
     }
 }

@@ -24,7 +24,11 @@ class CreateCompaniesTable extends Migration
             $table->string('phone');
             $table->string('cell_phone')->nullable();
             $table->integer('order_limit');
+            $table->string('observation')->nullable();
+            $table->time('opening_time');
+            $table->double('delivery_value')->nullable();
             $table->string('url')->nullable();
+            $table->text('image_base64')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')
@@ -39,6 +43,6 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('prices', 'companies');
     }
 }

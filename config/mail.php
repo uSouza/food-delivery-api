@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'uesley@pandeco.com.br'),
-        'name' => env('MAIL_FROM_NAME', 'Pandeco'),
+        'name' => env('MAIL_FROM_NAME', 'Contato Pandeco'),
     ],
 
     /*

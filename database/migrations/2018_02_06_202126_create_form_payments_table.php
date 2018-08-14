@@ -15,8 +15,11 @@ class CreateFormPaymentsTable extends Migration
     {
         Schema::create('form_payments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('company_id');
             $table->string('description');
             $table->timestamps();
+            $table->foreign('company_id')->references('id')
+                ->on('companies')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -29,41 +29,18 @@ class DatabaseSeeder extends Seeder
             'type' => 'company',
             'password' => bcrypt('pandeco2018')
         ]);
+        DB::table('users')->insert([
+            'name' => 'guest',
+            'email' => 'guest@pandeco.com.br',
+            'type' => 'guest',
+            'password' => bcrypt('pandeco2018')
+        ]);
         DB::table('clients')->insert([
             'user_id' => 2,
             'name' => 'client test',
             'cpf' => '564.882.560-92',
             'phone' => '(45)3252-0434',
             'cell_phone' => '(45)99815-8232'
-        ]);
-        DB::table('companies')->insert([
-            'user_id' => 3,
-            'cnpj' => '90.007.360/0001-08',
-            'responsible_name' => 'company test',
-            'responsible_phone' => '(45)3252-0434',
-            'social_name' => 'company test',
-            'fantasy_name' => 'company test',
-            'phone' => '(45)99815-8232',
-            'order_limit' => 2,
-            'cell_phone' => '(45)99815-8232'
-        ]);
-        DB::table('statuses')->insert([
-            'name' => 'pending'
-        ]);
-        DB::table('statuses')->insert([
-            'name' => 'confirmed'
-        ]);
-        DB::table('statuses')->insert([
-            'name' => 'closed'
-        ]);
-        DB::table('statuses')->insert([
-            'name' => 'refused'
-        ]);
-        DB::table('statuses')->insert([
-            'name' => 'refused'
-        ]);
-        DB::table('form_payments')->insert([
-            'description' => 'A vista'
         ]);
         DB::table('locations')->insert([
             'city' => 'Toledo',
@@ -77,33 +54,6 @@ class DatabaseSeeder extends Seeder
         DB::table('client_location')->insert([
             'client_id' => 1,
             'location_id' => 1
-        ]);
-        DB::table('company_location')->insert([
-            'company_id' => 1,
-            'location_id' => 1
-        ]);
-        DB::table('orders')->insert([
-            'client_id' => 1,
-            'company_id' => 1,
-            'status_id' => 1,
-            'form_payment_id' => 1,
-            'location_id' => 1,
-            'price' => 10,
-            'observation' => 'order test',
-            'deliver' => 0,
-            'receive_at' => \Carbon\Carbon::now()->toTimeString(),
-            'created_at' => \Carbon\Carbon::now()
-        ]);
-        DB::table('orders')->insert([
-            'client_id' => 1,
-            'company_id' => 1,
-            'status_id' => 1,
-            'form_payment_id' => 1,
-            'location_id' => 1,
-            'price' => 10,
-            'observation' => 'order test2',
-            'deliver' => 0,
-            'created_at' => \Carbon\Carbon::now()
         ]);
         DB::table('ingredient_groups')->insert([
             'name' => 'Geral'
@@ -148,97 +98,7 @@ class DatabaseSeeder extends Seeder
             'ingredient_group_id' => 2,
             'name' => 'Linguiça'
         ]);
-        DB::table('products')->insert([
-            'company_id' => 1,
-            'type' => 'marmita',
-            'description' => 'Pedido de marmita',
-            'size' => 'M',
-            'measure' => 'UN',
-            'date' => \Carbon\Carbon::now(),
-            'created_at' => \Carbon\Carbon::now()
-        ]);
-        DB::table('products')->insert([
-            'company_id' => 1,
-            'type' => 'marmita',
-            'description' => 'Pedido de marmita',
-            'size' => 'P',
-            'measure' => 'UN',
-            'date' => \Carbon\Carbon::now(),
-            'created_at' => \Carbon\Carbon::now()
-        ]);
-        DB::table('ingredient_product')->insert([
-            'product_id' => 1,
-            'ingredient_id' => 1
-        ]);
-        DB::table('ingredient_product')->insert([
-            'product_id' => 1,
-            'ingredient_id' => 2
-        ]);
-        DB::table('ingredient_product')->insert([
-            'product_id' => 1,
-            'ingredient_id' => 3
-        ]);
-        DB::table('ingredient_product')->insert([
-            'product_id' => 1,
-            'ingredient_id' => 4
-        ]);
-        DB::table('ingredient_product')->insert([
-            'product_id' => 1,
-            'ingredient_id' => 5
-        ]);
-        DB::table('ingredient_product')->insert([
-            'product_id' => 2,
-            'ingredient_id' => 1
-        ]);
-        DB::table('ingredient_product')->insert([
-            'product_id' => 2,
-            'ingredient_id' => 2
-        ]);
-        DB::table('ingredient_product')->insert([
-            'product_id' => 2,
-            'ingredient_id' => 3
-        ]);
-        DB::table('ingredient_product')->insert([
-            'product_id' => 2,
-            'ingredient_id' => 4
-        ]);
-        DB::table('ingredient_product')->insert([
-            'product_id' => 2,
-            'ingredient_id' => 5
-        ]);
-        DB::table('prices')->insert([
-            'size' => 'P',
-            'price' => 10,
-            'created_at' => \Carbon\Carbon::now()
-        ]);
-        DB::table('prices')->insert([
-            'size' => 'M',
-            'price' => 12,
-            'created_at' => \Carbon\Carbon::now()
-        ]);
-        DB::table('prices')->insert([
-            'size' => 'G',
-            'price' => 15,
-            'created_at' => \Carbon\Carbon::now()
-        ]);
-        DB::table('prices')->insert([
-            'size' => 'Fitness',
-            'price' => 12.5,
-            'created_at' => \Carbon\Carbon::now()
-        ]);
-        DB::table('prices')->insert([
-            'size' => 'Especial',
-            'price' => 14,
-            'created_at' => \Carbon\Carbon::now()
-        ]);
-        DB::table('price_product')->insert([
-            'product_id' => 1,
-            'price_id' => 2
-        ]);
-        DB::table('price_product')->insert([
-            'product_id' => 2,
-            'price_id' => 3
-        ]);
+
         DB::table('tags')->insert([
             'name' => 'Chinesa',
             'created_at' => \Carbon\Carbon::now()
@@ -247,55 +107,12 @@ class DatabaseSeeder extends Seeder
             'name' => 'Feijoada',
             'created_at' => \Carbon\Carbon::now()
         ]);
-        DB::table('product_tag')->insert([
-            'product_id' => 1,
-            'tag_id' => 1
-        ]);
-        DB::table('product_tag')->insert([
-            'product_id' => 2,
-            'tag_id' => 2
-        ]);
-        DB::table('worked_days')->insert([
-            'company_id' => 1,
-            'monday' => true,
-            'sunday' => true,
-            'tuesday' => true,
-            'wednesday' => true,
-            'thursday' => true,
-            'friday' => true,
-            'saturday' => true
-        ]);
-        DB::table('order_evaluations')->insert([
-            'order_id' => 1,
-            'note' => 4,
-        ]);
-        DB::table('order_evaluations')->insert([
-            'order_id' => 2,
-            'note' => 5,
-        ]);
+
         DB::table('additionals')->insert([
             'name' => 'Refrigerante'
         ]);
         DB::table('additionals')->insert([
             'name' => 'Carne'
-        ]);
-        DB::table('additional_company')->insert([
-            'company_id' => 1,
-            'additional_id' => 1,
-            'value' => 6.5
-        ]);
-        DB::table('additional_company')->insert([
-            'company_id' => 1,
-            'additional_id' => 2,
-            'value' => 1.5
-        ]);
-        DB::table('additional_order')->insert([
-            'order_id' => 1,
-            'additional_id' => 2
-        ]);
-        DB::table('additional_order')->insert([
-            'order_id' => 2,
-            'additional_id' => 1
         ]);
     }
 }

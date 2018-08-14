@@ -85,6 +85,7 @@ class OrdersController extends Controller
         $order->products()->detach();
         $order->additionals()->detach();
         $order->delete();
+        return $order;
     }
 
 }

@@ -12,6 +12,12 @@ class Ingredient extends Model
     {
         return $this->belongsToMany(Product::class);
     }
+
+    public function menus()
+    {
+        return $this->belongsToMany(Menu::class);
+    }
+
     public function ingredient_group()
     {
         return $this->belongsTo(IngredientGroup::class);

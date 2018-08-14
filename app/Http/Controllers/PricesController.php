@@ -15,16 +15,7 @@ class PricesController extends Controller
 
     public function store(Request $request)
     {
-        if (Auth::user()->type != "client") {
-            $product_id = $request->input('product_id');
-            $price = Price::create([
-                'size' => $request->input('size'),
-                'price' => $request->input('price'),
-            ]);
-            $price->products()->attach($product_id);
-            return $price;
-        }
-        return "Este usuario não pode cadastrar preços.";
+        return Price::create($request->all());
     }
 
     public function show(Price $price)

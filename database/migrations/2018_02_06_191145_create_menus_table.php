@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsTable extends Migration
+class CreateMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,28 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id');
-            $table->enum('type', ['marmita', 'bebida']);
-            $table->string('description')->nullable();
-            $table->enum('measure', ['UN', 'M', 'CM', 'L', 'ML']);
-            $table->char('size')->nullable();
+            $table->string('description');
+            $table->string('observation')->nullable();
             $table->date('date');
-            $table->timestamps();
+            $table->string('url')->nullable();
+            $table->text('image_base64')->nullable();
             $table->softDeletes();
             $table->foreign('company_id')->references('id')
                 ->on('companies')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('menus');
     }
 }

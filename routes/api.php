@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/v1/contacts', 'ContactsController@store');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -21,6 +22,10 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
        return request()->user();
     });
     Route::get('/interest', 'InterestsController@count');
+    Route::get('/additionals_company/{id}', 'CompaniesController@getAdditionalsFromCompany');
+    Route::get('/products/menu/{id}', 'ProductsController@productsByMenu');
+    Route::get('/menus/company/{id}', 'MenusController@menusByCompany');
+    Route::get('/ingredient_groups/menu/{id}', 'IngredientGroupsController@ingredientsByMenu');
     Route::resources([
         'clients' => 'ClientsController',
         'users' => 'UsersController',
@@ -38,5 +43,6 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
         'order_evaluations' => 'OrderEvaluationsController',
         'worked_days' => 'WorkedDaysController',
         'additionals' => 'AdditionalsController',
+        'menus' => 'MenusController',
     ]);
 });

@@ -25,15 +25,8 @@ class ProductsRequest extends FormRequest
     public function rules()
     {
         return [
-            'type' => [
-                'required',
-                Rule::in('bebida', 'marmita'),
-            ],
-            'company_id' => 'required',
-            'measure' => [
-                'required',
-                Rule::in('UN', 'M', 'CM', 'L', 'ML'),
-            ],
+            'menu_id' => 'required',
+            'price_id' => 'required',
         ];
     }
 }
