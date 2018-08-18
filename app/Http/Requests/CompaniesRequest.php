@@ -24,13 +24,7 @@ class CompaniesRequest extends FormRequest
     public function rules()
     {
         return [
-            'social_name' => 'required|max:255|min:3',
-            'fantasy_name' => 'required|max:255|min:3',
-            'phone' => 'required|telefone_com_ddd',
-            'cnpj' => 'required|cnpj|formato_cnpj',
-            'responsible_name' => 'required|max:255|min:3',
-            'responsible_phone' => 'required|celular_com_ddd',
-            'cell_phone' => 'required|celular_com_ddd',
+
         ];
     }
 }

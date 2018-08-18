@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MenusController extends Controller
 {
@@ -29,11 +30,15 @@ class MenusController extends Controller
 
     public function menusByCompany($id)
     {
-        return Menu::where('company_id', $id)->with(['prices', 'ingredients'])->get();
+        return Menu::select('menus.*', DB::raw("(select min(price) from prices where company_id = $id ) as min_price"))
+            ->where('company_id', $id)
+            ->with(['prices', 'ingredients'])
+            ->get();
     }
 
-    public function update(Request $request, Menu $menu)
+    public function update(Request $request, $id)
     {
+        $menu = Menu::findOrFail($id);
         $ingredients_ids = $request->input('ingredients_ids');
         $prices_ids = $request->input('prices_ids');
         $menu->update($request->except(['ingredients_ids', 'prices_ids']));

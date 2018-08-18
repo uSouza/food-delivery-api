@@ -67,8 +67,8 @@ class CompaniesController extends Controller
         $this->authorize('update', $company);
         $company->update($request->all());
         $data = $request->all();
-        DB::table('additional_company')->where('company_id', $company->id)->delete();
         if (! empty($data['additionals'])) {
+            DB::table('additional_company')->where('company_id', $company->id)->delete();
             for ($i = 0; $i < count($data['additionals']); $i++) {
                 DB::table('additional_company')->insert([
                     'company_id' => $company->id,
