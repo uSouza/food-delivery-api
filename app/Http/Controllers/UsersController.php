@@ -14,7 +14,9 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        User::create($request->all());
+        $data = $request->all();
+        $data['password'] = bcrypt($data['password']);
+        return User::create($data);
     }
 
     public function show(User $user)
