@@ -26,7 +26,7 @@ class UsersController extends Controller
 
     public function findUserByEmail($email)
     {
-        return User::where('email', $email);
+        return User::where('email', '=', $email)->firstOrFail();
     }
 
     public function update(Request $request, User $user)
