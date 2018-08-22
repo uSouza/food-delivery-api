@@ -24,7 +24,7 @@ class ClientPolicy
 
     public function create(User $user)
     {
-        return $user === "client";
+        return $user->type === "client";
     }
 
     public function update(User $user, Client $client)
