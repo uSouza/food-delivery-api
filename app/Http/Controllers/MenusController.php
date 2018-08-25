@@ -32,7 +32,10 @@ class MenusController extends Controller
     {
         return Menu::select('menus.*', DB::raw("(select min(price) from prices where company_id = $id ) as min_price"))
             ->where('company_id', $id)
-            ->with(['prices', 'ingredients'])
+            ->with(['prices' => function($q) use($id) {
+                $q->where('prices.company_id', $id);
+            }])
+            ->with('ingredients')
             ->get();
     }
 
