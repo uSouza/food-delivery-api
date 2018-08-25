@@ -27,6 +27,11 @@ class Company extends Model
         return $this->hasMany(Menu::class);
     }
 
+    public function form_payments()
+    {
+        return $this->hasMany(FormPayment::class);
+    }
+
     public function additionals()
     {
         return $this->belongsToMany(Additional::class);

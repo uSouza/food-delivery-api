@@ -23,11 +23,6 @@ class FormPaymentsController extends Controller
         return $form_payment;
     }
 
-    public function getFormPaymentsByCompany($id)
-    {
-        return FormPayment::where('company_id', $id)->get();
-    }
-
     public function update(Request $request, FormPayment $form_payment)
     {
         $form_payment->update($request->all());

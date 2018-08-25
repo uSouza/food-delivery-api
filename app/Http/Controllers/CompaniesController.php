@@ -13,7 +13,7 @@ class CompaniesController extends Controller
 
     public function index()
     {
-        return Company::with(['tags', 'additionals', 'menus', 'ingredient_groups'])->get();
+        return Company::with(['tags', 'additionals', 'menus', 'ingredient_groups', 'form_payments'])->get();
     }
 
     public function getAdditionalsFromCompany($id)
@@ -57,7 +57,7 @@ class CompaniesController extends Controller
 
     public function show($id)
     {
-        $company = Company::find($id)->with(['tags', 'additionals', 'menus'])->first();
+        $company = Company::find($id)->with(['tags', 'additionals', 'menus', 'ingredient_groups', 'form_payments'])->first();
         $this->authorize('view', $company);
         return $company;
     }
