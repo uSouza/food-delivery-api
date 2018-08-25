@@ -15,10 +15,7 @@ class StatusController extends Controller
 
     public function store(Request $request)
     {
-        if (Auth::user()->type == "admin") {
-            return Status::create($request->all());
-        }
-        return "Este usuario não pode cadastrar status";
+        return Status::create($request->all());
     }
 
     public function show(Status $status)

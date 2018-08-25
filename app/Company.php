@@ -11,7 +11,8 @@ class Company extends Model
         'social_name', 'fantasy_name', 'cell_phone',
         'phone', 'cnpj', 'responsible_name',
         'responsible_phone', 'user_id', 'observation',
-        'url', 'order_limit', 'opening_time', 'tags_ids'
+        'url', 'order_limit', 'opening_time', 'tags_ids',
+        'delivery_value',
     ];
     protected $dates = ['deleted_at'];
     use SoftDeletes;

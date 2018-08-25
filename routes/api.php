@@ -27,6 +27,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::post('/products/menu/email', 'ProductsController@productsByMenu');
     Route::get('/menus/company/{id}', 'MenusController@menusByCompany');
     Route::get('/ingredient_groups/menu/{id}', 'IngredientGroupsController@ingredientsByMenu');
+    Route::get('/form_payments/company/{id}', 'FormPaymentsController@getFormPaymentsByCompany');
     Route::resources([
         'clients' => 'ClientsController',
         'users' => 'UsersController',

@@ -15,7 +15,6 @@ class FormPaymentsController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('create', FormPayment::class);
         return FormPayment::create($request->all());
     }
 
@@ -24,16 +23,19 @@ class FormPaymentsController extends Controller
         return $form_payment;
     }
 
+    public function getFormPaymentsByCompany($id)
+    {
+        return FormPayment::where('company_id', $id)->get();
+    }
+
     public function update(Request $request, FormPayment $form_payment)
     {
-        $this->authorize('update', $form_payment);
         $form_payment->update($request->all());
         return $form_payment;
     }
 
     public function destroy(FormPayment $form_payment)
     {
-        $this->authorize('delete', $form_payment);
         $form_payment->delete();
         return $form_payment;
     }
