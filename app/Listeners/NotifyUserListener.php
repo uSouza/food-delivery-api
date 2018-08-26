@@ -26,11 +26,6 @@ class NotifyUserListener
      */
     public function handle(UserCreatedEvent $event)
     {
-        \Mail::send(new \App\Mail\UserRegistered($event->user), function ($message) use ($event) {
-            $message->to($event->user);
-            $message->subject('Bem vindo ao Pandeco!');
-        });
-
-
+        \Mail::to($event->user)->send(new \App\Mail\UserRegistered($event->user));
     }
 }

@@ -31,6 +31,8 @@ class UserRegistered extends Mailable
      */
     public function build()
     {
-        return $this->view('email.user.registered');
+        return $this->view('email.user.registered', function ($message) {
+            $message->subject('Seja bem vindo ao Pandeco!');
+        });
     }
 }
