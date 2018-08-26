@@ -43,7 +43,7 @@ class IngredientGroupsController extends Controller
         return IngredientGroup::select('ingredient_groups.*', 'company_ingredient_group.*')
             ->join('ingredients', 'ingredients.ingredient_group_id', '=', 'ingredient_groups.id')
             ->join('ingredient_menu', 'ingredient_menu.ingredient_id', '=', 'ingredients.id')
-            ->join('company_ingredient_group', function($join) use ($menu) {
+            ->leftjoin('company_ingredient_group', function($join) use ($menu) {
                 $join->on('company_ingredient_group.ingredient_group_id', '=', 'ingredient_groups.id')
                     ->where('company_ingredient_group.company_id', $menu->company_id);
             })
