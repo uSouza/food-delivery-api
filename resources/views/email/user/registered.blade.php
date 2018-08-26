@@ -13,7 +13,7 @@
     <tr>
         <td style="padding:10px 0 10px 0;" bgcolor="#2d2f3a" align="center">
             <img alt="Pandeco" style="display:block;"
-                 src="<?php echo $message->embed(public_path().'/img/users/logo.png'); ?>">
+                 src="<?php echo $message->embed(public_path().'/email/users/logo.png'); ?>">
         </td>
     </tr>
     <tr>
@@ -40,7 +40,7 @@
                             <tr>
                                 <td align="center">
                                     <img alt="Image" style="display:block;"
-                                         src="<?php echo $message->embed(public_path().'/img/users/img.png'); ?>">
+                                         src="<?php echo $message->embed(public_path().'/email/users/img.png'); ?>">
                                 </td>
                             </tr>
                             <tr>
@@ -56,7 +56,7 @@
                             <tr>
                                 <td align="center">
                                     <img alt="Contato" style="display:block;"
-                                         src="<?php echo $message->embed(public_path().'/img/users/contato.png'); ?>">
+                                         src="<?php echo $message->embed(public_path().'/email/users/contato.png'); ?>">
                                 </td>
                             </tr>
                             <tr>
