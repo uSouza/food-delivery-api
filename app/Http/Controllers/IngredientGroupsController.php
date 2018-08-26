@@ -45,7 +45,7 @@ class IngredientGroupsController extends Controller
             ->join('ingredient_menu', 'ingredient_menu.ingredient_id', '=', 'ingredients.id')
             ->leftjoin('company_ingredient_group', 'company_ingredient_group.ingredient_group_id', '=', 'ingredient_groups.id')
             ->where('ingredient_menu.menu_id', $menu->id)
-            ->where('company_id', $menu->company_id)
+            ->where('company_ingredient_group.company_id', $menu->company_id)
             ->with(['ingredients' => function($q) use($ingredients_ids_array) {
                 $q->whereIn('ingredients.id', $ingredients_ids_array);
             }])
