@@ -61,7 +61,7 @@
                             </tr>
                             <tr>
                                 <td style="padding:10px 0 10px 0;color:#666;font-size:15px;line-height:21px;">
-                                    Entre em contato por meio de nosso e-mail <span style="color:blue">contato@pandeco.com.br</span> ou nosso whatsap (45) 9 9105-8739.
+                                    Entre em contato por meio de nosso e-mail <span style="color:blue">contato@pandeco.com.br</span> ou nosso WhatsApp (45) 9 9105-8739.
                                 </td>
                             </tr>
                         </table>
