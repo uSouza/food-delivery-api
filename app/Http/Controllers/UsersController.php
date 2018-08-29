@@ -40,4 +40,9 @@ class UsersController extends Controller
         $user->delete();
         return $user;
     }
+
+    public function me(Request $request)
+    {
+        return User::where('id', '=', $request->user()->id)->with('client')->firstOrfail();
+    }
 }
