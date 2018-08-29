@@ -25,8 +25,6 @@ class ClientsRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255|min:3',
-            'phone' => 'required|telefone_com_ddd',
-            'cell_phone' => 'required|celular_com_ddd'
         ];
     }
 }
