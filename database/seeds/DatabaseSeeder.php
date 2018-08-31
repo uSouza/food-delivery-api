@@ -114,5 +114,11 @@ class DatabaseSeeder extends Seeder
         DB::table('additionals')->insert([
             'name' => 'Carne'
         ]);
+        DB::table('statuses')->insert([
+            'name' => 'Pendente'
+        ]);
+        DB::table('statuses')->insert([
+            'name' => 'Confirmada'
+        ]);
     }
 }

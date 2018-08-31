@@ -36,6 +36,7 @@ class OrdersController extends Controller
         $order = Order::create([
             'price' => $request->input('price'),
             'observation' => $request->input('observation'),
+            'receive_at' => $request->input('receive_at'),
             'deliver' => $request->input('deliver'),
             'client_id' => $client->id,
             'company_id' => $request->input('company_id'),
