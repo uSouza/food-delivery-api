@@ -19,7 +19,7 @@ class OrdersController extends Controller
             }
         }
         if ($user->type == "admin") {
-            return Order::all();
+            return Order::with(['additionals', 'products'])->get();
         }
     }
 
