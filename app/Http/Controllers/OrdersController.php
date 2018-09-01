@@ -23,6 +23,13 @@ class OrdersController extends Controller
         }
     }
 
+    public function ordersByClient($id)
+    {
+        return Order::where('client_id', $id)
+                ->with(['additionals', 'products'])
+                ->get();
+    }
+
     public function store(Request $request)
     {
         $this->authorize('create', Order::class);
