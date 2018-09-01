@@ -26,7 +26,7 @@ class OrdersController extends Controller
     public function ordersByClient($id)
     {
         return Order::where('client_id', $id)
-                ->with(['additionals', 'products', 'location', 'form_payment', 'client', 'company'])
+                ->with(['additionals', 'products', 'location', 'form_payment', 'client', 'company', 'products.ingredients'])
                 ->get();
     }
 
