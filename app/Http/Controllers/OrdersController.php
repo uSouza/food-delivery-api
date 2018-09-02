@@ -25,7 +25,11 @@ class OrdersController extends Controller
 
     public function ordersByClient($id)
     {
-        return Order::where('client_id', $id)
+        return Order::select('orders.*', 'additionals.name', 'additional_company.*')
+                ->join('additional_order', 'additional_order.order_id', '=', 'orders.id')
+                ->join('additionals', 'additional_order.additional_id', '=', 'additionals.id')
+                ->join('additional_company', 'additional_company.additional_id', '=', 'additionals.id')
+                ->where('client_id', $id)
                 ->with(['additionals', 'products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price'])
                 ->get();
     }
