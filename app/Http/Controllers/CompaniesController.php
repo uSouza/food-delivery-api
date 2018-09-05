@@ -65,8 +65,9 @@ class CompaniesController extends Controller
     public function update(Request $request, Company $company)
     {
         $this->authorize('update', $company);
-        $company->update($request->all());
+        $dataCompany = $request->except(['additionals', 'ingredient_groups', 'tags_ids']);
         $data = $request->all();
+        $company->update($dataCompany);
         if (! empty($data['additionals'])) {
             DB::table('additional_company')->where('company_id', $company->id)->delete();
             for ($i = 0; $i < count($data['additionals']); $i++) {
