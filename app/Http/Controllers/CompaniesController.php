@@ -21,7 +21,7 @@ class CompaniesController extends Controller
         $company = Company::findOrFail($id);
         return DB::table('additional_company')
                 ->join('additionals', 'additional_company.additional_id', '=', 'additionals.id')
-                ->select('additionals.name', 'additional_company.*')
+                ->select('additionals.name', 'additionals.isDrink', 'additional_company.*')
                 ->where('additional_company.company_id', $company->id)
                 ->get();
     }
