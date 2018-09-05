@@ -14,7 +14,7 @@ class AddIsDrinkToAdditionalsTable extends Migration
     public function up()
     {
         Schema::table('additionals', function (Blueprint $table) {
-            //
+            $table->boolean('isDrink')->nullable();
         });
     }
 
@@ -26,6 +26,7 @@ class AddIsDrinkToAdditionalsTable extends Migration
     public function down()
     {
         Schema::table('additionals', function (Blueprint $table) {
+
         });
     }
 }
