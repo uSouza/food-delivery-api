@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    protected $fillable = ['description', 'observation', 'menu_id', 'price_id', 'ingredients_ids'];
+    protected $fillable = ['description', 'observation', 'menu_id', 'price_id', 'ingredients_ids', 'additionals_ids'];
     protected $dates = ['deleted_at'];
     use SoftDeletes;
 
@@ -29,5 +29,10 @@ class Product extends Model
     public function ingredients()
     {
         return $this->belongsToMany(Ingredient::class);
+    }
+
+    public function additionals()
+    {
+        return $this->belongsToMany(Additional::class);
     }
 }

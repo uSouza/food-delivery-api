@@ -19,14 +19,14 @@ class OrdersController extends Controller
             }
         }
         if ($user->type == "admin") {
-            return Order::with(['additionals', 'products'])->get();
+            return Order::with(['products', 'products.additionals'])->get();
         }
     }
 
     public function ordersByClient($id)
     {
         return Order::where('client_id', $id)
-                ->with(['additionals', 'products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price'])
+                ->with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals'])
                 ->get();
     }
 
@@ -34,7 +34,6 @@ class OrdersController extends Controller
     {
         $this->authorize('create', Order::class);
         $products_ids = $request->input('products_ids');
-        $additionals_ids = $request->input('additionals_ids');
         $client = Client::whereIn('clients.user_id', function ($query) {
             $query->select('users.id')
                 ->from('users')
@@ -52,7 +51,6 @@ class OrdersController extends Controller
             'location_id' => $request->input('location_id'),
         ]);
         $order->products()->attach($products_ids);
-        $order->additionals()->attach($additionals_ids);
         return $order;
     }
 
@@ -70,7 +68,6 @@ class OrdersController extends Controller
                 ->where('users.id', auth()->id());
         })->get()->first();
         $products_ids = $request->input('products_ids');
-        $additionals_ids = $request->input('additionals_ids');
         $data = [
             'price' => $request->input('price'),
             'observation' => $request->input('observation'),
@@ -83,7 +80,6 @@ class OrdersController extends Controller
         ];
         $order->update($data);
         $order->products()->attach($products_ids);
-        $order->additionals()->attach($additionals_ids);
         return $order;
     }
 
@@ -91,7 +87,6 @@ class OrdersController extends Controller
     {
         $this->authorize('create', $order);
         $order->products()->detach();
-        $order->additionals()->detach();
         $order->delete();
         return $order;
     }

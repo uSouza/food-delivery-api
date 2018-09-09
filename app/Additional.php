@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Additional extends Model
 {
     protected $fillable = [
-        'name', 'value', 'isDrink'
+        'name', 'value', 'isDrink', 'company_id'
     ];
 
-    public function orders()
+    public function products()
     {
-        return $this->belongsToMany(Order::class);
+        return $this->belongsToMany(Product::class);
     }
-    public function companies()
+    public function company()
     {
-        return $this->belongsToMany(Company::class);
+        return $this->belongsTo(Company::class);
     }
 }

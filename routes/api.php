@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::get('users/me', 'UsersController@me');
     Route::get('/interest', 'InterestsController@count');
-    Route::get('/additionals_company/{id}', 'CompaniesController@getAdditionalsFromCompany');
+    Route::get('/additionals/company/{id}', 'AdditionalsController@getAdditionalsFromCompany');
     Route::get('/users/{email}', 'UsersController@findUserByEmail');
     Route::post('/products/menu/email', 'ProductsController@productsByMenu');
     Route::get('/menus/company/{id}', 'MenusController@menusByCompany');

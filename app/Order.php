@@ -10,8 +10,10 @@ class Order extends Model
     protected $fillable = [
         'price', 'observation', 'receive_at',
         'client_id', 'company_id', 'deliver', 'status_id',
-        'form_payment_id', 'location_id', 'products_ids', 'additionals_ids'
+        'form_payment_id', 'location_id', 'products_ids'
     ];
+
+    protected $dates = ['deleted_at'];
 
     use SoftDeletes;
 
@@ -43,11 +45,6 @@ class Order extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class);
-    }
-
-    public function additionals()
-    {
-        return $this->belongsToMany(Additional::class);
     }
 
     public function order_statuses()

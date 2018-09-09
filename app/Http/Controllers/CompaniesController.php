@@ -16,16 +16,6 @@ class CompaniesController extends Controller
         return Company::with(['tags', 'additionals', 'menus', 'ingredient_groups', 'form_payments'])->get();
     }
 
-    public function getAdditionalsFromCompany($id)
-    {
-        $company = Company::findOrFail($id);
-        return DB::table('additional_company')
-                ->join('additionals', 'additional_company.additional_id', '=', 'additionals.id')
-                ->select('additionals.name', 'additionals.isDrink', 'additional_company.*')
-                ->where('additional_company.company_id', $company->id)
-                ->get();
-    }
-
     public function store(Request $request)
     {
         $this->authorize('create', Company::class);
@@ -65,19 +55,9 @@ class CompaniesController extends Controller
     public function update(Request $request, Company $company)
     {
         $this->authorize('update', $company);
-        $dataCompany = $request->except(['additionals', 'ingredient_groups', 'tags_ids']);
+        $dataCompany = $request->except(['ingredient_groups', 'tags_ids']);
         $data = $request->all();
         $company->update($dataCompany);
-        if (! empty($data['additionals'])) {
-            DB::table('additional_company')->where('company_id', $company->id)->delete();
-            for ($i = 0; $i < count($data['additionals']); $i++) {
-                DB::table('additional_company')->insert([
-                    'company_id' => $company->id,
-                    'additional_id' => $data['additionals'][$i]['add_id'],
-                    'value' => $data['additionals'][$i]['add_value'],
-                ]);
-            }
-        }
         if (! empty($data['ingredient_groups'])) {
             for ($i = 0; $i < count($data['ingredient_groups']); $i++) {
                 DB::table('company_ingredient_group')->insert([
@@ -96,7 +76,6 @@ class CompaniesController extends Controller
     public function destroy(Company $company)
     {
         $this->authorize('delete', $company);
-        DB::table('additional_company')->where('company_id', $company->id)->delete();
         DB::table('company_ingredient_group')->where('company_id', $company->id)->delete();
         DB::table('company_tag')->where('company_id', $company->id)->delete();
         $company->delete();

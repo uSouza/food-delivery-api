@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Additional;
+use App\Company;
 use Illuminate\Http\Request;
 
 class AdditionalsController extends Controller
@@ -20,6 +21,12 @@ class AdditionalsController extends Controller
     public function show(Additional $add)
     {
         return $add;
+    }
+
+    public function getAdditionalsFromCompany($id)
+    {
+        $company = Company::findOrFail($id);
+        return Additional::where('company_id', $company->id);
     }
 
     public function update(Request $request, Additional $add)
