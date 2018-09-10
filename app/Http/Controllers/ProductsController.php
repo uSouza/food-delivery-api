@@ -31,7 +31,7 @@ class ProductsController extends Controller
 
         $product->ingredients()->attach($ingredients_ids);
 
-        return Product::where('id', $product->id)->with(['price', 'ingredients'])->get();
+        return Product::where('id', $product->id)->with(['price', 'ingredients'])->first();
     }
 
     public function show($id)
@@ -60,7 +60,7 @@ class ProductsController extends Controller
             }
         }
         $product->ingredients()->attach($ingredients_ids);
-        return Product::where('id', $product->id)->with(['price', 'ingredients'])->get();
+        return Product::where('id', $product->id)->with(['price', 'ingredients'])->first();
     }
 
     public function destroy(Product $product)
