@@ -11,7 +11,7 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        return Product::with(['price', 'ingredients', 'additionals'])->get();
+        return Product::with(['price', 'ingredients', 'additionals', 'menu'])->get();
     }
 
     public function store(Request $request)
@@ -31,17 +31,17 @@ class ProductsController extends Controller
 
         $product->ingredients()->attach($ingredients_ids);
 
-        return Product::where('id', $product->id)->with(['price', 'ingredients'])->first();
+        return Product::where('id', $product->id)->with(['price', 'ingredients', 'menu'])->first();
     }
 
     public function show($id)
     {
-        return Product::find($id)->with(['price', 'ingredients', 'additionals'])->first();
+        return Product::find($id)->with(['price', 'ingredients', 'additionals', 'menu'])->first();
     }
 
     public function productsByMenu($id)
     {
-        return Product::where('menu_id', $id)->with(['price', 'ingredients', 'additionals'])->get();
+        return Product::where('menu_id', $id)->with(['price', 'ingredients', 'additionals', 'menu'])->get();
     }
 
     public function update(Request $request, Product $product)
@@ -60,7 +60,7 @@ class ProductsController extends Controller
             }
         }
         $product->ingredients()->attach($ingredients_ids);
-        return Product::where('id', $product->id)->with(['price', 'ingredients'])->first();
+        return Product::where('id', $product->id)->with(['price', 'ingredients', 'menu'])->first();
     }
 
     public function destroy(Product $product)
