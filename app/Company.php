@@ -54,7 +54,7 @@ class Company extends Model
 
     public function ingredient_groups()
     {
-        return $this->belongsToMany(IngredientGroup::class);
+        return $this->hasMany(IngredientGroup::class);
     }
 
 }

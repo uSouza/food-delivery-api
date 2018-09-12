@@ -22,4 +22,5 @@ class Ingredient extends Model
     {
         return $this->belongsTo(IngredientGroup::class);
     }
+
 }

@@ -15,7 +15,6 @@ class IngredientsController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('create', Ingredient::class);
         return Ingredient::create($request->all());
     }
 
@@ -26,14 +25,12 @@ class IngredientsController extends Controller
 
     public function update(Request $request, Ingredient $ingredient)
     {
-        $this->authorize('update', $ingredient);
         $ingredient->update($request->all());
         return $ingredient;
     }
 
     public function destroy(Ingredient $ingredient)
     {
-        $this->authorize('delete', $ingredient);
         $ingredient->delete();
         return $ingredient;
     }

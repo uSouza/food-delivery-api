@@ -16,7 +16,6 @@ class IngredientGroupsController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('create', IngredientGroup::class);
         return IngredientGroup::create($request->all());
     }
 
@@ -40,13 +39,9 @@ class IngredientGroupsController extends Controller
             array_push($ingredients_ids_array, $ingredients_ids[$i]->id);
         }
 
-        return IngredientGroup::select('ingredient_groups.*', 'company_ingredient_group.*')
+        return IngredientGroup::select('ingredient_groups.*')
             ->join('ingredients', 'ingredients.ingredient_group_id', '=', 'ingredient_groups.id')
             ->join('ingredient_menu', 'ingredient_menu.ingredient_id', '=', 'ingredients.id')
-            ->leftjoin('company_ingredient_group', function($join) use ($menu) {
-                $join->on('company_ingredient_group.ingredient_group_id', '=', 'ingredient_groups.id')
-                    ->where('company_ingredient_group.company_id', $menu->company_id);
-            })
             ->where('ingredient_menu.menu_id', $menu->id)
             ->with(['ingredients' => function($q) use($ingredients_ids_array) {
                 $q->whereIn('ingredients.id', $ingredients_ids_array);

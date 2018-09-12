@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class IngredientGroup extends Model
 {
-    protected $fillable = ['name', 'number_options'];
+    protected $fillable = ['name', 'number_options', 'value', 'company_id'];
 
     public function ingredients()
     {
@@ -15,6 +15,6 @@ class IngredientGroup extends Model
 
     public function companies()
     {
-        return $this->belongsToMany(Company::class);
+        return $this->belongsTo(Company::class);
     }
 }
