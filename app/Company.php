@@ -12,7 +12,7 @@ class Company extends Model
         'phone', 'cnpj', 'responsible_name',
         'responsible_phone', 'user_id', 'observation',
         'url', 'order_limit', 'opening_time', 'tags_ids',
-        'delivery_value',
+        'delivery_value', 'avg_delivery_time'
     ];
     protected $dates = ['deleted_at'];
     use SoftDeletes;
