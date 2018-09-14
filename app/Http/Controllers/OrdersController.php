@@ -21,7 +21,7 @@ class OrdersController extends Controller
             }
         }
         if ($user->type == "admin") {
-            return Order::with(['products', 'products.additionals'])->get();
+            return Order::with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])->get();
         }
     }
 
