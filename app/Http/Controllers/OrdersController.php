@@ -15,7 +15,9 @@ class OrdersController extends Controller
         $company = $user->company();
         if ($user->type == "company") {
             if (!empty($company)) {
-                return Order::where('id', $company->id);
+                return Order::where('id', $company->id)
+                    ->with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+                    ->get();
             }
         }
         if ($user->type == "admin") {
