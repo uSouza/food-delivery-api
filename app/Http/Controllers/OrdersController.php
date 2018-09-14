@@ -12,7 +12,7 @@ class OrdersController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $company = $user->company();
+        $company = $user->findCompanyByUser();
         if ($user->type == "company") {
             if (!empty($company)) {
                 return Order::where('id', $company->id)
