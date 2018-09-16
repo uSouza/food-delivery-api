@@ -68,7 +68,9 @@ class OrdersController extends Controller
         $this->authorize('update', $order);
         $user = auth()->user();
         $client = $user->findClientByUser();
-        $products_ids = $request->input('products_ids');
+        if (! empty($request->input('products_ids'))) {
+            $products_ids = $request->input('products_ids');
+        }
         $data = [
             'price' => $request->input('price'),
             'observation' => $request->input('observation'),
