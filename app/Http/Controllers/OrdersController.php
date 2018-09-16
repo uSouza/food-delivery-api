@@ -80,7 +80,9 @@ class OrdersController extends Controller
             'location_id' => $request->input('location_id'),
         ];
         $order->update($data);
-        $order->products()->attach($products_ids);
+        if (! empty($products_ids)) {
+            $order->products()->attach($products_ids);
+        }
         return $order;
     }
 
