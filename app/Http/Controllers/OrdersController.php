@@ -66,11 +66,8 @@ class OrdersController extends Controller
     public function update(Request $request, Order $order)
     {
         $this->authorize('update', $order);
-        $client = Client::whereIn('clients.user_id', function ($query) {
-            $query->select('users.id')
-                ->from('users')
-                ->where('users.id', auth()->id());
-        })->get()->first();
+        $user = auth()->user();
+        $client = $user->findClientByUser();
         $products_ids = $request->input('products_ids');
         $data = [
             'price' => $request->input('price'),
