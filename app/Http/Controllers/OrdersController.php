@@ -58,7 +58,9 @@ class OrdersController extends Controller
 
     public function show(Order $order)
     {
-        return $order;
+        return Order::where('id', $order->id)
+            ->with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+            ->get();
     }
 
     public function update(Request $request, Order $order)
