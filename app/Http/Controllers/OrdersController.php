@@ -66,25 +66,12 @@ class OrdersController extends Controller
     public function update(Request $request, Order $order)
     {
         $this->authorize('update', $order);
-        $user = auth()->user();
-        $client = $user->findClientByUser();
         if (! empty($request->input('products_ids'))) {
             $products_ids = $request->input('products_ids');
-        }
-        $data = [
-            'price' => $request->input('price'),
-            'observation' => $request->input('observation'),
-            'deliver' => $request->input('deliver'),
-            'client_id' => $client->id,
-            'company_id' => $request->input('company_id'),
-            'status_id' => $request->input('status_id'),
-            'form_payment_id' => $request->input('form_payment_id'),
-            'location_id' => $request->input('location_id'),
-        ];
-        $order->update($data);
-        if (! empty($products_ids)) {
             $order->products()->attach($products_ids);
         }
+        $data = $request->except('products_ids');
+        $order->update($data);
         return $order;
     }
 
