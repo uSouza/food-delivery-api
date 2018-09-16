@@ -33,6 +33,6 @@ class Product extends Model
 
     public function additionals()
     {
-        return $this->belongsToMany(Additional::class);
+        return $this->belongsToMany(Additional::class)->withPivot('quantity');;
     }
 }
