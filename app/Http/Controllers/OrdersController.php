@@ -63,6 +63,44 @@ class OrdersController extends Controller
             ->first();
     }
 
+    public function getOpenOrders()
+    {
+        $user = Auth::user();
+        $company = $user->findCompanyByUser();
+        if ($user->type == "company") {
+            if (!empty($company)) {
+                return Order::where('id', $company->id)
+                    ->where('status_id', 1)
+                    ->with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+                    ->get();
+            }
+        }
+        if ($user->type == "admin") {
+            return Order::with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+                    ->where('status_id', 1)
+                    ->get();
+        }
+    }
+
+    public function getClosedOrders()
+    {
+        $user = Auth::user();
+        $company = $user->findCompanyByUser();
+        if ($user->type == "company") {
+            if (!empty($company)) {
+                return Order::where('id', $company->id)
+                    ->where('status_id', 2)
+                    ->with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+                    ->get();
+            }
+        }
+        if ($user->type == "admin") {
+            return Order::with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+                ->where('status_id', 2)
+                ->get();
+        }
+    }
+
     public function update(Request $request, Order $order)
     {
         $this->authorize('update', $order);
