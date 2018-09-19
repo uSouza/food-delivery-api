@@ -16,7 +16,13 @@ class IngredientGroupsController extends Controller
 
     public function store(Request $request)
     {
-        return IngredientGroup::create($request->all());
+        $user = auth()->user();
+        $company = $user->findCompanyByUser();
+        return IngredientGroup::create([
+            'name' => $request->input('name'),
+            'number_options' => $request->input('number_options'),
+            'company_id' => $company->id
+        ]);
     }
 
     public function show(IngredientGroup $ingredient_group)
