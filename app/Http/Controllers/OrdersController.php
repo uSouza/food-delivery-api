@@ -103,7 +103,6 @@ class OrdersController extends Controller
 
     public function update(Request $request, Order $order)
     {
-        $this->authorize('update', $order);
         if (! empty($request->input('products_ids'))) {
             $products_ids = $request->input('products_ids');
             $order->products()->attach($products_ids);
