@@ -23,6 +23,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::get('/additionals/company/{id}', 'AdditionalsController@getAdditionalsFromCompany');
     Route::get('/users/{email}', 'UsersController@findUserByEmail');
     Route::post('/products/menu/email', 'ProductsController@productsByMenu');
+    Route::post('/users/one_signal', 'UsersController@setOneSignalId');
     Route::get('/menus/company/{id}', 'MenusController@menusByCompany');
     Route::get('/orders/client/{id}', 'OrdersController@ordersByClient');
     Route::get('/orders/open', 'OrdersController@getOpenOrders');

@@ -37,6 +37,14 @@ class UsersController extends Controller
         return $user;
     }
 
+    public function setOneSignalId(Request $request)
+    {
+        $user = auth()->user();
+        $user->onesignal_id = $request->input('player_id');
+        $user->save();
+        return $user;
+    }
+
     public function destroy(User $user)
     {
         $user->delete();
