@@ -67,14 +67,12 @@ class IngredientGroupsController extends Controller
 
     public function update(Request $request, IngredientGroup $ingredient_group)
     {
-        $this->authorize('update', $ingredient_group);
         $ingredient_group->update($request->all());
         return $ingredient_group;
     }
 
     public function destroy(IngredientGroup $ingredient_group)
     {
-        $this->authorize('delete', $ingredient_group);
         $ingredient_group->delete();
         return $ingredient_group;
     }
