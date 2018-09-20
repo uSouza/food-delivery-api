@@ -11,6 +11,15 @@ class IngredientGroupsController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
+        $company = $user->findCompanyByUser();
+
+        if ($user->type == "company") {
+            return IngredientGroup::with('ingredients')
+                ->where('company_id', $company->id)
+                ->get();
+        }
+
         return IngredientGroup::with('ingredients')->get();
     }
 
