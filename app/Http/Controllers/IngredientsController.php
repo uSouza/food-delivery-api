@@ -26,7 +26,8 @@ class IngredientsController extends Controller
 
     public function store(Request $request)
     {
-        return Ingredient::create($request->all());
+        $ingredient = Ingredient::create($request->all());
+        return Ingredient::findOrFail($ingredient->id)->with(['ingredient_group'])->first();
     }
 
     public function show($id)
