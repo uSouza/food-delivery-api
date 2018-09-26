@@ -10,12 +10,26 @@ class AdditionalsController extends Controller
 {
     public function index()
     {
-        return Additional::all();
+        $user = auth()->user();
+        $company = $user->findCompanyByUser();
+        if ($user->type == "company") {
+            return Additional::with('company')
+                    ->where('company_id', $company->id)
+                    ->get();
+        }
+        return Additional::with('company')->get();
     }
 
     public function store(Request $request)
     {
-        return Additional::create($request->all());
+        $user = auth()->user();
+        $company = $user->findCompanyByUser();
+        return Additional::create([
+            'name' => $request->input('name'),
+            'value' => $request->input('value'),
+            'isDrink' => $request->input('isDrink'),
+            'company_id' => $company->id
+        ]);
     }
 
     public function show(Additional $add)
