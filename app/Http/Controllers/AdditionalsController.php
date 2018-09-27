@@ -49,8 +49,9 @@ class AdditionalsController extends Controller
         return $add;
     }
 
-    public function destroy(Additional $add)
+    public function destroy($id)
     {
+        $add = Additional::findOrFail($id);
         $add->delete();
         return $add;
     }
