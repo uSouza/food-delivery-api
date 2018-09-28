@@ -45,7 +45,6 @@ class PricesController extends Controller
     public function destroy($id)
     {
         $price = Price::findOrFail($id);
-        $price->products()->detach();
         $price->delete();
         return $price;
     }
