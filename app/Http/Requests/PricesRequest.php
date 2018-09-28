@@ -29,7 +29,6 @@ class PricesRequest extends FormRequest
                 'required',
                 Rule::in(['P', 'M', 'G', 'GG', 'Fitness', 'Especial']),
             ],
-            'company_id' => 'required',
             'price' => 'required|min:0',
         ];
     }
