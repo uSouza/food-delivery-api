@@ -10,12 +10,25 @@ class PricesController extends Controller
 {
     public function index()
     {
-        return Price::all();
+        $user = auth()->user();
+        $company = $user->findCompanyByUser();
+        if ($user->type == "company") {
+            return Price::with('company')
+                ->where('company_id', $company->id)
+                ->get();
+        }
+        return Price::with('company')->get();
     }
 
     public function store(Request $request)
     {
-        return Price::create($request->all());
+        $user = auth()->user();
+        $company = $user->findCompanyByUser();
+        return Price::create([
+            'size' => $request->input('size'),
+            'price' => $request->input('price'),
+            'company_id' => $company->id
+        ]);
     }
 
     public function show(Price $price)
@@ -29,8 +42,9 @@ class PricesController extends Controller
         return $price;
     }
 
-    public function destroy(Price $price)
+    public function destroy($id)
     {
+        $price = Price::findOrFail($id);
         $price->products()->detach();
         $price->delete();
         return $price;
