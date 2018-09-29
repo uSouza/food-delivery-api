@@ -59,9 +59,17 @@ class MenusController extends Controller
         $menu = Menu::findOrFail($id);
         $ingredients_ids = $request->input('ingredients_ids');
         $prices_ids = $request->input('prices_ids');
+
+        if (! empty($ingredients_ids)) {
+            $menu->ingredients()->detach();
+            $menu->ingredients()->attach($ingredients_ids);
+        }
+        if (! empty($prices_ids)) {
+            $menu->prices()->detach();
+            $menu->prices()->attach($prices_ids);
+        }
+
         $menu->update($request->except(['ingredients_ids', 'prices_ids']));
-        $menu->ingredients()->attach($ingredients_ids);
-        $menu->prices()->attach($prices_ids);
         return $menu;
     }
 
