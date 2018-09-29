@@ -10,14 +10,29 @@ class MenusController extends Controller
 {
     public function index()
     {
-        return Menu::with(['prices', 'ingredients'])->get();
+        $user = auth()->user();
+        $company = $user->findCompanyByUser();
+        if ($user->type == "company") {
+            return Menu::with(['prices', 'ingredients', 'company'])
+                ->where('company_id', $company->id)
+                ->get();
+        }
+        return Menu::with(['prices', 'ingredients', 'company'])->get();
     }
 
     public function store(Request $request)
     {
+        $user = auth()->user();
+        $company = $user->findCompanyByUser();
         $ingredients_ids = $request->input('ingredients_ids');
         $prices_ids = $request->input('prices_ids');
-        $menu = Menu::create($request->except(['ingredients_ids', 'prices_ids']));
+        $data = $request->except(['ingredients_ids', 'prices_ids']);
+        $menu = Menu::create([
+            'description' => $data['description'],
+            'observation' => $data['observation'],
+            'company_id' => $company->id,
+            'date' => $data['date']
+        ]);
         $menu->ingredients()->attach($ingredients_ids);
         $menu->prices()->attach($prices_ids);
         return $menu;
