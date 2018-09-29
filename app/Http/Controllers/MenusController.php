@@ -40,7 +40,7 @@ class MenusController extends Controller
 
     public function show($id)
     {
-        return Menu::find($id)->with(['prices', 'ingredients'])->first();
+        return Menu::find($id)->with(['prices', 'ingredients', 'ingredients.ingredient_group'])->first();
     }
 
     public function menusByCompany($id)
