@@ -18,6 +18,7 @@ class IngredientsController extends Controller
                     ->select('ingredients.*')
                     ->join('ingredient_groups', 'ingredients.ingredient_group_id', '=', 'ingredient_groups.id')
                     ->where('ingredient_groups.company_id', $company->id)
+                    ->orderBy('ingredient_group_id')
                     ->get();
         }
         return Ingredient::with('ingredient_group')->get();
