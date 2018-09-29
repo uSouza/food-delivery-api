@@ -61,11 +61,11 @@ class MenusController extends Controller
         $prices_ids = $request->input('prices_ids');
 
         if (! empty($ingredients_ids)) {
-            $menu->ingredients()->detach();
+            DB::table('ingredient_menu')->where('menu_id', $menu->id)->delete();
             $menu->ingredients()->attach($ingredients_ids);
         }
         if (! empty($prices_ids)) {
-            $menu->prices()->detach();
+            DB::table('ingredient_price')->where('menu_id', $menu->id)->delete();
             $menu->prices()->attach($prices_ids);
         }
 
