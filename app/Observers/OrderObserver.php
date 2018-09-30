@@ -29,10 +29,26 @@ class OrderObserver
     {
         $client = Client::findOrFail($order->client_id);
         $user = User::findOrFail($client->user_id);
+        $company = Company::findOrFail($order->company_id);
+        $content = null;
+        $heading = null;
 
-        $content = array(
-            "en" => 'O seu pedido foi confirmado pelo restaurante!'
-        );
+        if ($order->status_id == 2) {
+            $content = array(
+                "en" => 'O seu pedido foi confirmado pelo restaurante ' . $company->fantasy_name
+            );
+            $heading = array(
+                "en" => 'Pedido confirmado'
+            );
+        } else if ($order->status_id == 4) {
+            $content = array(
+                "en" => 'O seu pedido foi rejeitado pelo restaurante ' . $company->fantasy_name
+            );
+            $heading = array(
+                "en" => 'Pedido rejeitado'
+            );
+
+        }
 
         $client_http = new \GuzzleHttp\Client();
         $client_http->post(
@@ -42,10 +58,12 @@ class OrderObserver
                     ['app_id' => "18e4fb1f-4d47-4196-8ded-4883a763d9d7",
                         'include_player_ids' => array($user->onesignal_id),
                         'data' => array("foo" => "bar"),
-                        'contents' => $content]
+                        'contents' => $content,
+                        'headings' => $heading]
             ],
             ['Content-Type' => 'application/json',
-             'Authorization' => 'Basic NjgxNTYxYzctN2FiMi00ZjlmLWE3ODItNmI1NTdmNDgxOGEy']
+                'Authorization' => 'Basic NjgxNTYxYzctN2FiMi00ZjlmLWE3ODItNmI1NTdmNDgxOGEy']
         );
+
     }
 }
