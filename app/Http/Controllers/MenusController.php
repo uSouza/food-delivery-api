@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class MenusController extends Controller
 {
@@ -45,8 +46,11 @@ class MenusController extends Controller
 
     public function menusByCompany($id)
     {
+        $today = new Carbon();
+        $today->format('Y-m-d');
         return Menu::select('menus.*', DB::raw("(select min(price) from prices where company_id = $id ) as min_price"))
             ->where('company_id', $id)
+            ->where('date', '>=', $today)
             ->with(['prices' => function($q) use($id) {
                 $q->where('prices.company_id', $id);
             }])
