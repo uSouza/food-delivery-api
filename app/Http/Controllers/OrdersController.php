@@ -88,7 +88,7 @@ class OrdersController extends Controller
         $company = $user->findCompanyByUser();
         if ($user->type == "company") {
             if (!empty($company)) {
-                return Order::where('id', $company->id)
+                return Order::where('company_id', $company->id)
                     ->where('status_id', 2)
                     ->with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
                     ->get();
