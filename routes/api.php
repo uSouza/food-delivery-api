@@ -30,6 +30,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::get('/orders/closed', 'OrdersController@getClosedOrders');
     Route::get('/ingredient_groups/menu/{id}', 'IngredientGroupsController@ingredientsByMenu');
     Route::get('/additionals/restore/{id}', 'AdditionalsController@restore');
+    Route::get('/menus/restore/{id}', 'MenusController@restore');
     Route::resources([
         'clients' => 'ClientsController',
         'users' => 'UsersController',

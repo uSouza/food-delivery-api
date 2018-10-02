@@ -15,6 +15,7 @@ class MenusController extends Controller
         $company = $user->findCompanyByUser();
         if ($user->type == "company") {
             return Menu::with(['prices', 'ingredients', 'company'])
+                ->withTrashed()
                 ->where('company_id', $company->id)
                 ->get();
         }
@@ -41,7 +42,16 @@ class MenusController extends Controller
 
     public function show($id)
     {
-        return Menu::where('id', $id)->with(['prices', 'ingredients', 'ingredients.ingredient_group'])->first();
+        return Menu::where('id', $id)->with(['prices', 'ingredients', 'ingredients.ingredient_group'])->withTrashed()->first();
+    }
+
+    public function restore($id) {
+        $menu = Menu::withTrashed()
+            ->where('id', $id)
+            ->first();
+
+        $menu->restore();
+        return $menu;
     }
 
     public function menusByCompany($id)
@@ -55,6 +65,7 @@ class MenusController extends Controller
                 $q->where('prices.company_id', $id);
             }])
             ->with('ingredients')
+            ->withTrashed()
             ->get();
     }
 
