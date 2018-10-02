@@ -90,8 +90,6 @@ class MenusController extends Controller
 
     public function destroy(Menu $menu)
     {
-        $menu->ingredients()->detach();
-        $menu->prices()->detach();
         $menu->delete();
         return $menu;
     }
