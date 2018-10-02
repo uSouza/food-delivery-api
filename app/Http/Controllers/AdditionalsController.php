@@ -14,6 +14,7 @@ class AdditionalsController extends Controller
         $company = $user->findCompanyByUser();
         if ($user->type == "company") {
             return Additional::with('company')
+                    ->withTrashed()
                     ->where('company_id', $company->id)
                     ->get();
         }
@@ -46,6 +47,15 @@ class AdditionalsController extends Controller
     public function update(Request $request, Additional $add)
     {
         $add->update($request->all());
+        return $add;
+    }
+
+    public function restore($id) {
+        $add = Additional::withTrashed()
+               ->where('id', $id)
+               ->first();
+
+        $add->restore();
         return $add;
     }
 

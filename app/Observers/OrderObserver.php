@@ -42,7 +42,7 @@ class OrderObserver
             );
         } else if ($order->status_id == 4) {
             $content = array(
-                "en" => 'O seu pedido foi rejeitado pelo restaurante ' . $company->fantasy_name
+                "en" => 'O seu pedido foi rejeitado pelo restaurante ' . $company->fantasy_name . '. Pedimos desculpas. Por favor, realize seu pedido em outro restaurante!'
             );
             $heading = array(
                 "en" => 'Pedido rejeitado'
