@@ -34,7 +34,6 @@ class OrdersController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('create', Order::class);
         $products_ids = $request->input('products_ids');
         $order = Order::create($request->except('products_ids'));
         $order->products()->attach($products_ids);
