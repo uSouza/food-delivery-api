@@ -36,22 +36,7 @@ class OrdersController extends Controller
     {
         $this->authorize('create', Order::class);
         $products_ids = $request->input('products_ids');
-        $client = Client::whereIn('clients.user_id', function ($query) {
-            $query->select('users.id')
-                ->from('users')
-                ->where('users.id', auth()->id());
-        })->get()->first();
-        $order = Order::create([
-            'price' => $request->input('price'),
-            'observation' => $request->input('observation'),
-            'receive_at' => $request->input('receive_at'),
-            'deliver' => $request->input('deliver'),
-            'client_id' => $client->id,
-            'company_id' => $request->input('company_id'),
-            'status_id' => $request->input('status_id'),
-            'form_payment_id' => $request->input('form_payment_id'),
-            'location_id' => $request->input('location_id'),
-        ]);
+        $order = Order::create($request->except('products_ids'));
         $order->products()->attach($products_ids);
         return $order;
     }
