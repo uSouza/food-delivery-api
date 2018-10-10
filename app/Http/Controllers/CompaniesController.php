@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Company;
 use App\Http\Requests\CompaniesRequest as Request;
 use App\WorkedDays;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -14,6 +15,18 @@ class CompaniesController extends Controller
     public function index()
     {
         return Company::with(['tags', 'additionals', 'menus', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments'])->get();
+    }
+
+    public function getAvailableCompanies()
+    {
+        $today = new Carbon();
+        $today->format('Y-m-d');
+
+        return Company::with(
+            ['tags', 'additionals', 'menus', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments']
+        )
+            ->whereRaw('company.id in (select company_id from menus where data >= ?)', $today)
+            ->get();
     }
 
     public function store(Request $request)
