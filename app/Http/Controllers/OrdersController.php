@@ -52,7 +52,6 @@ class OrdersController extends Controller
             'form_payment_id' => $request->input('form_payment_id'),
             'location_id' => $request->input('location_id'),
         ]);
-        dd($order);
         $order->products()->attach($products_ids);
         return $order;
     }
