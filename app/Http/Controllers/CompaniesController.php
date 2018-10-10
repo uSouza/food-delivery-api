@@ -25,7 +25,7 @@ class CompaniesController extends Controller
         return Company::with(
             ['tags', 'additionals', 'menus', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments']
         )
-            ->whereRaw('company.id in (select company_id from menus where data >= "?")', $today)
+            ->whereRaw('company.id in (select company_id from menus where date >= "?")', $today)
             ->get();
     }
 
