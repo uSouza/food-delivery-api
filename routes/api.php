@@ -50,5 +50,6 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
         'worked_days' => 'WorkedDaysController',
         'additionals' => 'AdditionalsController',
         'menus' => 'MenusController',
+        'service_hours' => 'ServiceHoursController'
     ]);
 });

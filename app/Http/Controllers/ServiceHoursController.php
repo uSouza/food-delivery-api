@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\WorkedDays;
+use App\ServiceHour;
 use Illuminate\Http\Request;
 
-class WorkedDaysController extends Controller
+class ServiceHoursController extends Controller
 {
     public function index()
     {
         $user = auth()->user();
         $company = $user->findCompanyByUser();
         if ($user->type == "company") {
-            return WorkedDays::with('company')
+            return ServiceHour::with('company')
                 ->where('company_id', $company->id)
                 ->get();
         }
-        return WorkedDays::with('company')->get();
+        return ServiceHour::with('company')->get();
     }
     public function store(Request $request)
     {
@@ -24,22 +24,22 @@ class WorkedDaysController extends Controller
         $company = $user->findCompanyByUser();
         $data = $request->all();
         $data['company_id'] = $company->id;
-        return WorkedDays::create($data);
+        return ServiceHour::create($data);
     }
     public function show($id)
     {
-        return WorkedDays::find($id);
+        return ServiceHour::find($id);
     }
     public function update(Request $request, $id)
     {
-        $wdays = WorkedDays::findOrFail($id);
-        $wdays->update($request->all());
-        return $wdays;
+        $serviceHour = ServiceHour::find($id);
+        $serviceHour->update($request->all());
+        return $serviceHour;
     }
     public function destroy($id)
     {
-        $wdays = WorkedDays::find($id);
-        $wdays->delete();
-        return $wdays;
+        $serviceHour = ServiceHour::find($id);
+        $serviceHour->delete();
+        return $serviceHour;
     }
 }
