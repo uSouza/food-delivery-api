@@ -45,16 +45,18 @@ class CompaniesController extends Controller
         foreach($companies as $c) {
             $wday = DB::table('worked_days')->select($weekday)->where('company_id', $c->id)->first();
             $service_hours = ServiceHour::where('company_id', $c->id)->get();
-            if ($wday->$weekday) {
-                foreach ($service_hours as $s) {
-                    if ($hour >= $s->opening and $hour <= $s->closure) {
-                        $c->is_open = true;
-                    } else {
-                        $c->is_open = false;
+            if (! empty($wday)) {
+                if ($wday->$weekday) {
+                    foreach ($service_hours as $s) {
+                        if ($hour >= $s->opening and $hour <= $s->closure) {
+                            $c->is_open = true;
+                        } else {
+                            $c->is_open = false;
+                        }
                     }
+                } else {
+                    $c->is_open = false;
                 }
-            } else {
-                $c->is_open = false;
             }
         }
         return $companies;
