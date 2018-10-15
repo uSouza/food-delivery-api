@@ -20,10 +20,7 @@ class WorkedDaysController extends Controller
     }
     public function store(Request $request)
     {
-        $user = auth()->user();
-        $company = $user->findCompanyByUser();
         $data = $request->all();
-        $data['company_id'] = $company->id;
         return WorkedDays::create($data);
     }
     public function show($id)

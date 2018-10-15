@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Company;
-use App\Http\Requests\CompaniesRequest as Request;
 use App\WorkedDays;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -34,7 +34,6 @@ class CompaniesController extends Controller
         $this->authorize('create', Company::class);
         $tags_ids = $request->input('tags_ids');
         $data = $request->except('tags_ids');
-        $data['user_id'] = Auth::user()->id;
         $company = Company::create($data);
         $company->tags()->attach($tags_ids);
         return $company;

@@ -24,8 +24,7 @@ class CompaniesLocationsController extends Controller
             'postal_code' => $request->input('postal_code'),
             'observation' => $request->input('observation'),
         ]);
-        $user = auth()->user();
-        $company = $user->findCompanyByUser();
+        $company = Company::findOrFail($request->input('company_id'));
         $company->locations()->attach($location->id);
 
         return $location;
