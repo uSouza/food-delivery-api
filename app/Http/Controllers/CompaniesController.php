@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\ServiceHour;
 use App\WorkedDays;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,12 +22,42 @@ class CompaniesController extends Controller
     {
         $today = new Carbon();
         $today->format('Y-m-d');
+        $now = new Carbon();
+        $hour = $now->format('H:i:s');
+        $weekMap = [
+            0 => 'sunday',
+            1 => 'monday',
+            2 => 'tuesday',
+            3 => 'wednesday',
+            4 => 'thursday',
+            5 => 'friday',
+            6 => 'saturday',
+        ];
+        $dayOfTheWeek = Carbon::now()->dayOfWeek;
+        $weekday = $weekMap[$dayOfTheWeek];
 
-        return Company::with(
-            ['tags', 'additionals', 'menus', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments']
+        $companies = Company::with(
+            ['tags', 'additionals', 'menus', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'service_hours', 'worked_days']
         )
             ->whereRaw("companies.id in (select company_id from menus where date >= '$today')")
             ->get();
+
+        foreach($companies as $c) {
+            $wday = DB::table('worked_days')->select($weekday)->where('company_id', $c->id)->first();
+            $service_hours = ServiceHour::where('company_id', $c->id)->get();
+            if ($wday->$weekday) {
+                foreach ($service_hours as $s) {
+                    if ($hour >= $s->opening and $hour <= $s->closure) {
+                        $c->is_open = true;
+                    } else {
+                        $c->is_open = false;
+                    }
+                }
+            } else {
+                $c->is_open = false;
+            }
+        }
+        return $companies;
     }
 
     public function store(Request $request)

@@ -37,6 +37,16 @@ class Company extends Model
         return $this->hasMany(Additional::class);
     }
 
+    public function service_hours()
+    {
+        return $this->hasMany(ServiceHour::class);
+    }
+
+    public function worked_days()
+    {
+        return $this->hasMany(WorkedDays::class);
+    }
+
     public function locations()
     {
         return $this->belongsToMany(Location::class);
