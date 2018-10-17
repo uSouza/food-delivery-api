@@ -16,7 +16,7 @@ class CompaniesController extends Controller
     public function index()
     {
         $month = Carbon::now()->month;
-        $companies = Company::with(['tags', 'additionals', 'menus', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'service_hours', 'worked_days', 'user'])->get();
+        $companies = Company::with(['tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'service_hours', 'worked_days', 'user', 'locations'])->get();
         foreach ($companies as $c) {
             $number_orders =
                 DB::table('orders')
@@ -83,7 +83,7 @@ class CompaniesController extends Controller
 
     public function show($id)
     {
-        $company = Company::find($id)->with(['tags', 'additionals', 'menus', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'service_hours', 'worked_days', 'user'])->first();
+        $company = Company::find($id)->with(['tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'service_hours', 'worked_days', 'user'])->first();
         return $company;
     }
 
