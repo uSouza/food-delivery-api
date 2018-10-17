@@ -83,8 +83,7 @@ class CompaniesController extends Controller
 
     public function show($id)
     {
-        $company = Company::find($id)->with(['tags', 'additionals', 'menus', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments'])->first();
-        $this->authorize('view', $company);
+        $company = Company::find($id)->with(['tags', 'additionals', 'menus', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'service_hours', 'worked_days', 'user'])->first();
         return $company;
     }
 
