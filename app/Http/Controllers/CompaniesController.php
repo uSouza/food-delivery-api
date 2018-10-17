@@ -46,7 +46,7 @@ class CompaniesController extends Controller
         $weekday = $weekMap[$dayOfTheWeek];
 
         $companies = Company::with(
-            ['tags', 'additionals', 'menus', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'service_hours', 'worked_days']
+            ['tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'service_hours', 'worked_days', 'locations']
         )
             ->whereRaw("companies.id in (select company_id from menus where date >= '$today')")
             ->get();
