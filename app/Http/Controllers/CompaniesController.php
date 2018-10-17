@@ -15,7 +15,16 @@ class CompaniesController extends Controller
 
     public function index()
     {
-        return Company::with(['tags', 'additionals', 'menus', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments'])->get();
+        $month = Carbon::now()->month;
+        $companies = Company::with(['tags', 'additionals', 'menus', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'service_hours', 'worked_days'])->get();
+        foreach ($companies as $c) {
+            $number_orders =
+                DB::table('orders')
+                ->whereRaw('extract(month from created_at) = ? and company_id = ?', [$month, $c->id])
+                ->count();
+            $c->number_orders_month = $number_orders;
+        }
+        return $companies;
     }
 
     public function getAvailableCompanies()
