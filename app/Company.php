@@ -52,9 +52,9 @@ class Company extends Model
         return $this->belongsToMany(Location::class);
     }
 
-    public function workedDays()
+    public function user()
     {
-        return $this->hasOne(WorkedDays::class);
+        return $this->hasOne(User::class);
     }
 
     public function tags()
