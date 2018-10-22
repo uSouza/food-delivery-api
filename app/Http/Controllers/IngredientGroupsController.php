@@ -41,7 +41,7 @@ class IngredientGroupsController extends Controller
 
     public function ingredientsByMenu($id)
     {
-        $menu= Menu::findOrFail($id);
+        $menu = Menu::findOrFail($id);
 
         $ingredients_ids =
             DB::table('ingredients')

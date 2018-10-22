@@ -10,12 +10,24 @@ class FormPaymentsController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
+        $company = $user->findCompanyByUser();
+
+        if ($user->type == "company") {
+            return FormPayment::where('company_id', $company->id)->get();
+        }
+
         return FormPayment::all();
     }
 
     public function store(Request $request)
     {
-        return FormPayment::create($request->all());
+        $user = auth()->user();
+        $company = $user->findCompanyByUser();
+        return FormPayment::create([
+            'company_id' => $company->id,
+            'description' => $request->input('description')
+        ]);
     }
 
     public function show(FormPayment $form_payment)
