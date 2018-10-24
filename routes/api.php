@@ -32,6 +32,8 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::get('/additionals/restore/{id}', 'AdditionalsController@restore');
     Route::get('/menus/restore/{id}', 'MenusController@restore');
     Route::get('companies/available', 'CompaniesController@getAvailableCompanies');
+    Route::get('orders/cancel/{id}', 'OrdersController@cancel');
+
     Route::resources([
         'clients' => 'ClientsController',
         'users' => 'UsersController',

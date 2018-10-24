@@ -48,6 +48,14 @@ class OrderObserver
                 "en" => 'Pedido rejeitado'
             );
 
+        } else if ($order->status_id == 5) {
+            $content = array(
+                "en" => 'O seu pedido do restaurante ' . $company->fantasy_name . ' foi cancelado com sucesso.'
+            );
+            $heading = array(
+                "en" => 'Pedido cancelado'
+            );
+
         }
 
         $client_http = new \GuzzleHttp\Client();
@@ -55,14 +63,18 @@ class OrderObserver
             'https://onesignal.com/api/v1/notifications',
             [
                 \GuzzleHttp\RequestOptions::JSON =>
-                    ['app_id' => "18e4fb1f-4d47-4196-8ded-4883a763d9d7",
+                    [
+                        'app_id' => "18e4fb1f-4d47-4196-8ded-4883a763d9d7",
                         'include_player_ids' => array($user->onesignal_id),
                         'data' => array("foo" => "bar"),
                         'contents' => $content,
-                        'headings' => $heading]
+                        'headings' => $heading
+                    ]
             ],
-            ['Content-Type' => 'application/json',
-                'Authorization' => 'Basic NjgxNTYxYzctN2FiMi00ZjlmLWE3ODItNmI1NTdmNDgxOGEy']
+            [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Basic NjgxNTYxYzctN2FiMi00ZjlmLWE3ODItNmI1NTdmNDgxOGEy'
+            ]
         );
 
     }

@@ -120,4 +120,12 @@ class OrdersController extends Controller
         return $order;
     }
 
+    public function cancel($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->status_id = 5;
+        $order->save();
+        return $order;
+    }
+
 }
