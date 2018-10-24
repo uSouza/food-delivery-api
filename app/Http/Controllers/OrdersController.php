@@ -70,7 +70,7 @@ class OrdersController extends Controller
         if ($user->type == "company") {
             if (!empty($company)) {
                 return Order::where('company_id', $company->id)
-                    ->where('status_id', 1)
+                    ->whereIn('status_id', [1, 5])
                     ->with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
                     ->get();
             }
