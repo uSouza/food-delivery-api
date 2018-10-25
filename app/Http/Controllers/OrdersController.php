@@ -114,7 +114,6 @@ class OrdersController extends Controller
 
     public function destroy(Order $order)
     {
-        $this->authorize('create', $order);
         $order->products()->detach();
         $order->delete();
         return $order;
