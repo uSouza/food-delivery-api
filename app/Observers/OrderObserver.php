@@ -30,6 +30,7 @@ class OrderObserver
         $client = Client::findOrFail($order->client_id);
         $user = User::findOrFail($client->user_id);
         $company = Company::findOrFail($order->company_id);
+        $user_company = User::findOrFail($company->user_id);
         $content = null;
         $heading = null;
 
@@ -77,10 +78,35 @@ class OrderObserver
             ]
         );
 
+        if ($order->status_id == 5) {
+            $content = array(
+                "en" => 'Um pedido foi cancelado :('
+            );
+            $heading = array(
+                "en" => 'Pedido cancelado'
+            );
+            $client_http->post(
+                'https://onesignal.com/api/v1/notifications',
+                [
+                    \GuzzleHttp\RequestOptions::JSON =>
+                        [
+                            'app_id' => "f9e6f12d-e1d9-449f-b5e8-0294874f286c",
+                            'include_player_ids' => array($user_company->onesignal_id),
+                            'data' => array("foo" => "bar"),
+                            'contents' => $content,
+                            'headings' => $heading
+                        ]
+                ],
+                [
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Basic YWVhOTUyMzItMDc0YS00MTBmLTkxMGYtOTFmZTAwN2MzMTkw'
+                ]
+            );
+        }
+
     }
 
     public function created(Order $order) {
-        $client = Client::findOrFail($order->client_id);
         $company = Company::findOrFail($order->company_id);
         $user = User::findOrFail($company->user_id);
 
