@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
+use App\Http\Requests\TagsRequest as Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 
 class TagsController extends Controller
 {
