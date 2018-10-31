@@ -25,10 +25,6 @@ class PricesRequest extends FormRequest
     public function rules()
     {
         return [
-            'size' => [
-                'required',
-                Rule::in(['P', 'M', 'G', 'GG', 'Fitness', 'Especial']),
-            ],
             'price' => 'required|min:0',
         ];
     }
