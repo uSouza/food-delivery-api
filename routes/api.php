@@ -33,6 +33,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::get('/menus/restore/{id}', 'MenusController@restore');
     Route::get('companies/available', 'CompaniesController@getAvailableCompanies');
     Route::get('orders/cancel/{id}', 'OrdersController@cancel');
+    Route::get('companies_locations/getLocationsByCompany/{company_id}', 'CompaniesLocationsController@getLocationsByCompany');
 
     Route::resources([
         'clients' => 'ClientsController',

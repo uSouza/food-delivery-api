@@ -5,12 +5,22 @@ namespace App\Http\Controllers;
 use App\Company;
 use App\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CompaniesLocationsController extends Controller
 {
     public function index()
     {
         return Location::findLocationsByCompany();
+    }
+
+    public function getLocationsByCompany($company_id)
+    {
+        return DB::table('locations')
+                 ->join('company_location', 'locations.id', '=', 'company_location.location_id')
+                 ->where('company_location.company_id', $company_id)
+                 ->get();
+
     }
 
     public function store(Request $request)
