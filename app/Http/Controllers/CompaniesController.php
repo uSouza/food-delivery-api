@@ -91,9 +91,19 @@ class CompaniesController extends Controller
     public function update(Request $request, $id)
     {
         $company = Company::findOrFail($id);
-        $dataCompany = $request->except(['tags_ids']);
         $data = $request->all();
-        $company->update($dataCompany);
+        $company->update([
+            'avg_delivery_time' => $data['avg_delivery_time'],
+            'cell_phone' => $data['cell_phone'],
+            'delivery_value' => $data['delivery_value'],
+            'fantasy_name' => $data['fantasy_name'],
+            'observation' => $data['observation'],
+            'order_limit' => $data['order_limit'],
+            'responsible_name' => $data['responsible_name'],
+            'responsible_phone' => $data['responsible_name'],
+            'social_name' => $data['social_name'],
+            'url' => $data['url']
+        ]);
         if (! empty($data['tags_ids'])) {
             $company->tags()->detach();
             $company->tags()->attach($data['tags_ids']);
