@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\ServiceHour;
+use App\User;
 use App\WorkedDays;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -103,6 +104,8 @@ class CompaniesController extends Controller
     {
         $this->authorize('delete', $company);
         DB::table('company_tag')->where('company_id', $company->id)->delete();
+        $user = User::find($company->user_id);
+        $user->delete();
         $company->delete();
         return $company;
     }
