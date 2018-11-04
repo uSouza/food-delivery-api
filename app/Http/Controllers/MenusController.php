@@ -58,8 +58,7 @@ class MenusController extends Controller
     {
         $today = new Carbon();
         $today->format('Y-m-d');
-        return Menu::select('menus.*', DB::raw("(select min(price) from prices where company_id = $id ) as min_price"))
-            ->where('company_id', $id)
+        $menus = Menu::where('company_id', $id)
             ->where('date', '>=', $today)
             ->with(['prices' => function($q) use($id) {
                 $q->where('prices.company_id', $id);
@@ -67,6 +66,13 @@ class MenusController extends Controller
             ->with('ingredients')
             ->withTrashed()
             ->get();
+        foreach ($menus as $m) {
+            $m->min_price = DB::table('prices')
+                                ->join('menu_price', 'prices.id', '=', 'menu_price.price_id')
+                                ->where('menu_price.menu_id', $m->id)
+                                ->min('price');
+        }
+        return $menus;
     }
 
     public function update(Request $request, $id)
