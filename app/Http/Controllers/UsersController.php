@@ -32,7 +32,9 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $data = $request->all();
-        $data['password'] = bcrypt($data['password']);
+        if (! empty($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
+        }
         $user->update($data);
         return $user;
     }
