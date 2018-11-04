@@ -88,13 +88,14 @@ class CompaniesController extends Controller
         return $company;
     }
 
-    public function update(Request $request, Company $company)
+    public function update(Request $request, $id)
     {
-        $this->authorize('update', $company);
-        $dataCompany = $request->except(['ingredient_groups', 'tags_ids']);
+        $company = Company::findOrFail($id);
+        $dataCompany = $request->except(['tags_ids']);
         $data = $request->all();
         $company->update($dataCompany);
         if (! empty($data['tags_ids'])) {
+            $company->tags()->detach();
             $company->tags()->attach($data['tags_ids']);
         }
         return $company;
