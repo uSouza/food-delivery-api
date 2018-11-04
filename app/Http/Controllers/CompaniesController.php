@@ -92,18 +92,16 @@ class CompaniesController extends Controller
     {
         $company = Company::findOrFail($id);
         $data = $request->all();
-        $company->update([
-            'avg_delivery_time' => $data['avg_delivery_time'],
-            'cell_phone' => $data['cell_phone'],
-            'delivery_value' => $data['delivery_value'],
-            'fantasy_name' => $data['fantasy_name'],
-            'observation' => $data['observation'],
-            'order_limit' => $data['order_limit'],
-            'responsible_name' => $data['responsible_name'],
-            'responsible_phone' => $data['responsible_name'],
-            'social_name' => $data['social_name'],
-            'url' => $data['url']
-        ]);
+        $company->avg_delivery_time = $data['avg_delivery_time'];
+        $company->delivery_value = $data['delivery_value'];
+        $company->fantasy_name = $data['fantasy_name'];
+        $company->observation = $data['observation'];
+        $company->order_limit = $data['order_limit'];
+        $company->responsible_name = $data['responsible_name'];
+        $company->responsible_phone = $data['responsible_phone'];
+        $company->social_name = $data['social_name'];
+        $company->url = $data['url'];
+        $company->save();
         if (! empty($data['tags_ids'])) {
             $company->tags()->detach();
             $company->tags()->attach($data['tags_ids']);
