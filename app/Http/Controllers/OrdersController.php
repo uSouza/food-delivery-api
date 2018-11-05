@@ -43,7 +43,7 @@ class OrdersController extends Controller
         $data = $request->except(['client_id', 'products_ids']);
         $data['client_id'] = $client->id;
         $order = Order::create($data);
-        dd($order);
+        dd($order->id);
         $order->products()->attach($products_ids);
         return $order;
     }
