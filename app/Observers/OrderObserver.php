@@ -11,20 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class OrderObserver
 {
-    public function creating(Order $order)
-    {
-        $now = new Carbon();
-        $now->format('Y-m-d');
-        $company = Company::find($order->company_id);
-        $count = Order::select(DB::raw('COUNT(id) As order_count'))
-                    ->whereRaw("cast(created_at as date) = '".$now."'")
-                    ->get();
-        $limit = $company->order_limit;
-        if ($count->first()->order_count >= $limit){
-            return false;
-        }
-    }
-
     public function updated(Order $order)
     {
         $client = Client::findOrFail($order->client_id);
