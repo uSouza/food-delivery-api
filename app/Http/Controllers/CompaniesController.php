@@ -92,6 +92,7 @@ class CompaniesController extends Controller
     {
         $company = Company::findOrFail($id);
         $data = $request->all();
+        dd($company);
         $company->avg_delivery_time = $data['avg_delivery_time'];
         $company->delivery_value = $data['delivery_value'];
         $company->fantasy_name = $data['fantasy_name'];
