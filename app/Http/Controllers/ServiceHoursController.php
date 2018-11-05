@@ -41,7 +41,7 @@ class ServiceHoursController extends Controller
     }
     public function destroyByCompany($company_id)
     {
-        $serviceHours = ServiceHour::where('company_id', $company_id);
+        $serviceHours = ServiceHour::where('company_id', $company_id)->get();
         foreach ($serviceHours as $s) {
             $s->delete();
         }
