@@ -88,21 +88,10 @@ class CompaniesController extends Controller
         return $company;
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Company $company)
     {
-        $company = Company::findOrFail($id);
         $data = $request->all();
-        dd($company);
-        $company->avg_delivery_time = $data['avg_delivery_time'];
-        $company->delivery_value = $data['delivery_value'];
-        $company->fantasy_name = $data['fantasy_name'];
-        $company->observation = $data['observation'];
-        $company->order_limit = $data['order_limit'];
-        $company->responsible_name = $data['responsible_name'];
-        $company->responsible_phone = $data['responsible_phone'];
-        $company->social_name = $data['social_name'];
-        $company->url = $data['url'];
-        $company->save();
+        $company->update($request->except('tags_ids'));
         if (! empty($data['tags_ids'])) {
             $company->tags()->detach();
             $company->tags()->attach($data['tags_ids']);
