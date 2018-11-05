@@ -16,7 +16,6 @@ class ClientsController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('create', Client::class);
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
         return Client::create($data);
@@ -29,14 +28,12 @@ class ClientsController extends Controller
 
     public function update(Request $request, Client $client)
     {
-        $this->authorize('update', $client);
         $client->update($request->all());
         return $client;
     }
 
     public function destroy(Client $client)
     {
-        $this->authorize('delete', $client);
         return $client->delete();
     }
 }
