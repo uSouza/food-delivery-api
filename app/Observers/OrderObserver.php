@@ -92,7 +92,7 @@ class OrderObserver
 
     }
 
-    public function created(Order $order) {
+/*    public function created(Order $order) {
         $company = Company::findOrFail($order->company_id);
         $user = User::findOrFail($company->user_id);
 
@@ -124,5 +124,5 @@ class OrderObserver
                 'Authorization' => 'Basic YWVhOTUyMzItMDc0YS00MTBmLTkxMGYtOTFmZTAwN2MzMTkw'
             ]
         );
-    }
+    }*/
 }
