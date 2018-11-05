@@ -34,24 +34,16 @@ class OrdersController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('create', Order::class);
         $products_ids = $request->input('products_ids');
         $client = Client::whereIn('clients.user_id', function ($query) {
             $query->select('users.id')
                 ->from('users')
                 ->where('users.id', auth()->id());
         })->get()->first();
-        $order = Order::create([
-            'price' => $request->input('price'),
-            'observation' => $request->input('observation'),
-            'receive_at' => $request->input('receive_at'),
-            'deliver' => $request->input('deliver'),
-            'client_id' => $client->id,
-            'company_id' => $request->input('company_id'),
-            'status_id' => $request->input('status_id'),
-            'form_payment_id' => $request->input('form_payment_id'),
-            'location_id' => $request->input('location_id'),
-        ]);
+        $data = $request->except(['client_id', 'products_ids']);
+        $data['client_id'] = $client->id;
+        $order = Order::create($data);
+        dd($order);
         $order->products()->attach($products_ids);
         return $order;
     }
@@ -77,7 +69,7 @@ class OrdersController extends Controller
         }
         if ($user->type == "admin") {
             return Order::with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
-                    ->where('status_id', 1)
+                    ->whereIn('status_id', [1, 5])
                     ->get();
         }
     }
