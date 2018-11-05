@@ -39,4 +39,12 @@ class ServiceHoursController extends Controller
         $serviceHour->delete();
         return $serviceHour;
     }
+    public function destroyByCompany($company_id)
+    {
+        $serviceHours = ServiceHour::where('company_id', $company_id);
+        foreach ($serviceHours as $s) {
+            $s->delete();
+        }
+        return $serviceHours;
+    }
 }

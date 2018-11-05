@@ -34,6 +34,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::get('companies/available', 'CompaniesController@getAvailableCompanies');
     Route::get('orders/cancel/{id}', 'OrdersController@cancel');
     Route::get('companies_locations/company/{company_id}', 'CompaniesLocationsController@getLocationsByCompany');
+    Route::delete('service_hours/company/{company_id}', 'ServiceHoursController@destroyByCompany');
 
     Route::resources([
         'clients' => 'ClientsController',
