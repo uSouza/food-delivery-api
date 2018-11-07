@@ -68,6 +68,7 @@ class CompaniesController extends Controller
                     $c->is_open = false;
                 }
             }
+            $c ->open_at = DB::table('service_hours')->where('company_id', $c->id)->min('open_at');
         }
         return $companies;
     }
