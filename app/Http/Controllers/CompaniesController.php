@@ -21,7 +21,7 @@ class CompaniesController extends Controller
         foreach ($companies as $c) {
             $number_orders =
                 DB::table('orders')
-                ->whereRaw('extract(month from created_at) = ? and company_id = ?', [$month, $c->id])
+                ->whereRaw('extract(month from created_at) = ? and company_id = ? and status_id=2', [$month, $c->id])
                 ->count();
             $c->number_orders_month = $number_orders;
         }

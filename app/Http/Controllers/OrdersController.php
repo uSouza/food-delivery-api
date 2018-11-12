@@ -63,12 +63,14 @@ class OrdersController extends Controller
                 return Order::where('company_id', $company->id)
                     ->whereIn('status_id', [1, 5])
                     ->with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+                    ->orderBy('created_at')
                     ->get();
             }
         }
         if ($user->type == "admin") {
             return Order::with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
                     ->whereIn('status_id', [1, 5])
+                    ->orderBy('created_at')
                     ->get();
         }
     }
@@ -82,12 +84,14 @@ class OrdersController extends Controller
                 return Order::where('company_id', $company->id)
                     ->where('status_id', 2)
                     ->with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+                    ->orderBy('created_at')
                     ->get();
             }
         }
         if ($user->type == "admin") {
             return Order::with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
                 ->where('status_id', 2)
+                ->orderBy('created_at')
                 ->get();
         }
     }
