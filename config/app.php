@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://api.pandeco.com.br'),
+    'url' => env('APP_URL', 'http://api.pandeco.com.br'),
 
     /*
     |--------------------------------------------------------------------------
