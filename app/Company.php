@@ -9,7 +9,7 @@ class Company extends Model
 {
     protected $fillable = [
         'social_name', 'fantasy_name', 'cell_phone',
-        'phone', 'cnpj', 'responsible_name',
+        'phone', 'cnpj', 'responsible_name', 'only_cash',
         'responsible_phone', 'user_id', 'observation',
         'url', 'order_limit', 'opening_time', 'tags_ids',
         'delivery_value', 'avg_delivery_time', 'image_base64'
