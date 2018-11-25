@@ -11,7 +11,7 @@ class Company extends Model
         'social_name', 'fantasy_name', 'cell_phone',
         'phone', 'cnpj', 'responsible_name', 'only_cash',
         'responsible_phone', 'user_id', 'observation',
-        'url', 'order_limit', 'opening_time', 'tags_ids',
+        'url', 'order_limit', 'opening_time', 'tags_ids', 'time_delivery',
         'delivery_value', 'avg_delivery_time', 'image_base64'
     ];
     protected $dates = ['deleted_at'];
