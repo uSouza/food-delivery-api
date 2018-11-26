@@ -22,10 +22,7 @@ class OrderObserver
 
         if ($order->status_id == 2) {
             $content = array(
-                "en" => 'O seu pedido foi confirmado pelo restaurante '
-                    . $company->fantasy_name . 'Lembrando que o seu pedido pode chegar em até '
-                    . Carbon::createFromFormat('mm', '2018-01-01 ' . $company->avg_delivery_time)->toDateTimeString()
-                    . ' minutos. Obrigado pela preferência.'
+                "en" => 'O seu pedido foi confirmado pelo restaurante ' . $company->fantasy_name
             );
             $heading = array(
                 "en" => 'Pedido confirmado'
