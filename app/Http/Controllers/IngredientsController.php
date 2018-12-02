@@ -29,7 +29,7 @@ class IngredientsController extends Controller
     public function store(Request $request)
     {
         $ingredient_group = IngredientGroup::findOrFail($request->input('ingredient_group_id'));
-        $exists = Ingredient::whereRaw('upper(name) = ? and company_id = ?', strtoupper($request->input('name')), $ingredient_group->company_id)->first();
+        $exists = Ingredient::whereRaw('upper(name) = '. strtoupper($request->input('name')) . ' and ingredient_group_id in (select id from ingredient_groups where company_id = ' . $ingredient_group->company_id . ')')->first();
         if (! empty($exists)) {
             return 'ingredient already registered';
         }
