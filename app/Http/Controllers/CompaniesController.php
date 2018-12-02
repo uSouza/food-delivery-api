@@ -47,7 +47,7 @@ class CompaniesController extends Controller
         $weekday = $weekMap[$dayOfTheWeek];
 
         $companies = Company::with(
-            ['tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'service_hours', 'worked_days', 'locations']
+            ['tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'locations']
         )
             ->whereRaw("companies.id in (select company_id from menus where date >= '$today')")
             ->get();
@@ -57,11 +57,16 @@ class CompaniesController extends Controller
             $service_hours = ServiceHour::where('company_id', $c->id)->get();
             if (! empty($wday)) {
                 if ($wday->$weekday) {
+                    $c->is_open = false;
                     foreach ($service_hours as $s) {
-                        if ($hour >= $s->opening and $hour <= $s->closure) {
-                            $c->is_open = true;
-                        } else {
-                            $c->is_open = false;
+                        $opening = Carbon::parse($s->opening)->format('H:i:s');
+                        $closure = Carbon::parse($s->closure)->format('H:i:s');
+                        if (! $c->is_open) {
+                            if ($hour >= $opening and $hour <= $closure) {
+                                $c->is_open = true;
+                            } else {
+                                $c->is_open = false;
+                            }
                         }
                     }
                 } else {

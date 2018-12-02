@@ -64,7 +64,6 @@ class MenusController extends Controller
                 $q->where('prices.company_id', $id);
             }])
             ->with('ingredients')
-            ->withTrashed()
             ->get();
         foreach ($menus as $m) {
             $m->min_price = DB::table('prices')
