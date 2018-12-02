@@ -59,7 +59,7 @@ class MenusController extends Controller
         $today = new Carbon();
         $today->format('Y-m-d');
         $menus = Menu::where('company_id', $id)
-            ->where('date', '>=', $today)
+            ->where('date', '=', $today)
             ->with(['prices' => function($q) use($id) {
                 $q->where('prices.company_id', $id);
             }])
