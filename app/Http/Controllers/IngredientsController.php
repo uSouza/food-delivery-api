@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Ingredient;
 use App\Http\Requests\IngredientsRequest as Request;
+use App\IngredientGroup;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -27,7 +28,8 @@ class IngredientsController extends Controller
 
     public function store(Request $request)
     {
-        $exists = Ingredient::whereRaw('upper(name) = ?', strtoupper($request->input('name')))->first();
+        $ingredient_group = IngredientGroup::findOrFail($request->input('ingredient_group_id'));
+        $exists = Ingredient::whereRaw('upper(name) = ? and company_id = ?', strtoupper($request->input('name')), $ingredient_group->company_id)->first();
         if (! empty($exists)) {
             return 'ingredient already registered';
         }
