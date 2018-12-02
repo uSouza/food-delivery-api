@@ -27,6 +27,10 @@ class IngredientsController extends Controller
 
     public function store(Request $request)
     {
+        $exists = Ingredient::whereRaw('upper(name) = ?', strtoupper($request->input('name')))->first();
+        if (! empty($exists)) {
+            return 'ingredient already registered';
+        }
         return Ingredient::create($request->all());
     }
 
