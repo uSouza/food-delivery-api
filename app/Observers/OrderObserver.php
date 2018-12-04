@@ -92,37 +92,39 @@ class OrderObserver
 
     }
 
-/*    public function created(Order $order) {
+    public function created(Order $order) {
         $company = Company::findOrFail($order->company_id);
         $user = User::findOrFail($company->user_id);
 
-        $content = null;
-        $heading = null;
+        if(! empty($user->onesignal_id)) {
+            $content = null;
+            $heading = null;
 
-        $content = array(
-            "en" => 'Novo pedido recebido :)'
-        );
-        $heading = array(
-            "en" => 'Pedido recebido'
-        );
+            $content = array(
+                "en" => 'Novo pedido recebido :)'
+            );
+            $heading = array(
+                "en" => 'Pedido recebido'
+            );
 
-        $client_http = new \GuzzleHttp\Client();
-        $client_http->post(
-            'https://onesignal.com/api/v1/notifications',
-            [
-                \GuzzleHttp\RequestOptions::JSON =>
-                    [
-                        'app_id' => "f9e6f12d-e1d9-449f-b5e8-0294874f286c",
-                        'include_player_ids' => array($user->onesignal_id),
-                        'data' => array("foo" => "bar"),
-                        'contents' => $content,
-                        'headings' => $heading
-                    ]
-            ],
-            [
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Basic YWVhOTUyMzItMDc0YS00MTBmLTkxMGYtOTFmZTAwN2MzMTkw'
-            ]
-        );
-    }*/
+            $client_http = new \GuzzleHttp\Client();
+            $client_http->post(
+                'https://onesignal.com/api/v1/notifications',
+                [
+                    \GuzzleHttp\RequestOptions::JSON =>
+                        [
+                            'app_id' => "f9e6f12d-e1d9-449f-b5e8-0294874f286c",
+                            'include_player_ids' => array($user->onesignal_id),
+                            'data' => array("foo" => "bar"),
+                            'contents' => $content,
+                            'headings' => $heading
+                        ]
+                ],
+                [
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Basic YWVhOTUyMzItMDc0YS00MTBmLTkxMGYtOTFmZTAwN2MzMTkw'
+                ]
+            );
+        }
+    }
 }
