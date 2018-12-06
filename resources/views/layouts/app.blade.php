@@ -8,10 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Pandeco Delivery de Refeições</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{{ asset('img/favicon.ico') }}}">
 </head>
 <body>
     <div id="app">
@@ -29,7 +30,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        Pandeco
                     </a>
                 </div>
 
@@ -40,7 +41,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+{{--                    <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
@@ -66,7 +67,7 @@
                                 </ul>
                             </li>
                         @endguest
-                    </ul>
+                    </ul>--}}
                 </div>
             </div>
         </nav>
