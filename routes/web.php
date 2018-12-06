@@ -17,5 +17,5 @@ use Illuminate\Support\Facades\Redirect;
 Route::get('/', function () {
     return Redirect::to('/doc/index.html');
 });
-
+Route::get('/thanks', 'HomeController@thanks');
 Auth::routes();
