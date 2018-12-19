@@ -37,7 +37,7 @@ class PasswordResetRequest extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $url = "http://reset.pandeco.com.br/reset?token=" . $this->token;
+        $url = "http://reset.pandeco.com.br/?token=" . $this->token;
         return (new MailMessage)->view(
             'email.reset.reset',
             [
