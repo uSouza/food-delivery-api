@@ -30,6 +30,9 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::get('orders/cancel/{id}', 'OrdersController@cancel');
     Route::get('companies_locations/company/{company_id}', 'CompaniesLocationsController@getLocationsByCompany');
     Route::delete('service_hours/company/{company_id}', 'ServiceHoursController@destroyByCompany');
+    Route::post('password/create', 'PasswordResetController@create');
+    Route::get('password/find/{token}', 'PasswordResetController@find');
+    Route::post('password/reset', 'PasswordResetController@reset');
 
     Route::resources([
         'clients' => 'ClientsController',
