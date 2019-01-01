@@ -62,7 +62,7 @@ class CompaniesController extends Controller
 
                     $query->where('date', $today)
                         ->orWhere('fixed_menu', true);
-                })->get();
+                })->count();
             if (! empty($wday)) {
                 if ($wday->$weekday) {
                     $c->is_open = false;
@@ -70,7 +70,7 @@ class CompaniesController extends Controller
                         $opening = Carbon::parse($s->opening)->format('H:i:s');
                         $closure = Carbon::parse($s->closure)->format('H:i:s');
                         if (! $c->is_open) {
-                            if ($hour >= $opening and $hour <= $closure and !empty($menus)) {
+                            if ($hour >= $opening and $hour <= $closure and $menus > 0) {
                                 $c->is_open = true;
                             } else {
                                 $c->is_open = false;
