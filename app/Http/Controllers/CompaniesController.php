@@ -48,9 +48,7 @@ class CompaniesController extends Controller
 
         $companies = Company::with(
             ['tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'locations']
-        )
-            ->whereRaw("companies.id in (select company_id from menus where (date >= '$today' or fixed_menu = true))")
-            ->get();
+        )->get();
 
         foreach($companies as $c) {
             $wday = DB::table('worked_days')->select($weekday)->where('company_id', $c->id)->first();
