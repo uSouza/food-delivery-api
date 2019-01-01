@@ -57,13 +57,19 @@ class MenusController extends Controller
 
     public function menusByCompany($id)
     {
-        $today = new Carbon();
-        $today->format('Y-m-d');
-        $menus = Menu::with(['prices' => function($q) use($id) {
+        $menus = Menu::where('company_id', $id)
+            ->where(function ($query) {
+
+                $today = new Carbon();
+                $today->format('Y-m-d');
+
+                $query->where('date', $today)
+                    ->orWhere('fixed_menu', true);
+            })
+            ->with(['prices' => function($q) use($id) {
                 $q->where('prices.company_id', $id);
             }])
             ->with('ingredients')
-            ->whereRaw("company_id = $id and (date = $today or fixed_menu = true)")
             ->get();
         foreach ($menus as $m) {
             $m->min_price = DB::table('prices')
