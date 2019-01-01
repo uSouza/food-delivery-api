@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Menu;
 use App\ServiceHour;
 use App\User;
 use App\WorkedDays;
@@ -53,6 +54,15 @@ class CompaniesController extends Controller
         foreach($companies as $c) {
             $wday = DB::table('worked_days')->select($weekday)->where('company_id', $c->id)->first();
             $service_hours = ServiceHour::where('company_id', $c->id)->get();
+            $menus = Menu::where('company_id', $c->id)
+                ->where(function ($query) {
+
+                    $today = new Carbon();
+                    $today->format('Y-m-d');
+
+                    $query->where('date', $today)
+                        ->orWhere('fixed_menu', true);
+                })->get();
             if (! empty($wday)) {
                 if ($wday->$weekday) {
                     $c->is_open = false;
@@ -60,7 +70,7 @@ class CompaniesController extends Controller
                         $opening = Carbon::parse($s->opening)->format('H:i:s');
                         $closure = Carbon::parse($s->closure)->format('H:i:s');
                         if (! $c->is_open) {
-                            if ($hour >= $opening and $hour <= $closure) {
+                            if ($hour >= $opening and $hour <= $closure and !empty($menus)) {
                                 $c->is_open = true;
                             } else {
                                 $c->is_open = false;
