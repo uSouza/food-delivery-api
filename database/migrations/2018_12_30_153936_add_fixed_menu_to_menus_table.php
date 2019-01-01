@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddIsDrinkToAdditionalsTable2 extends Migration
+class AddFixedMenuToMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddIsDrinkToAdditionalsTable2 extends Migration
      */
     public function up()
     {
-        Schema::table('additionals', function (Blueprint $table) {
-            $table->boolean('isDrink')->nullable();
+        Schema::table('menus', function (Blueprint $table) {
+            $table->boolean('fixed_menu')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddIsDrinkToAdditionalsTable2 extends Migration
      */
     public function down()
     {
-        Schema::table('additionals', function (Blueprint $table) {
-
+        Schema::table('menus', function (Blueprint $table) {
+            //
         });
     }
 }

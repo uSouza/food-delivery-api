@@ -32,6 +32,7 @@ class MenusController extends Controller
         $menu = Menu::create([
             'description' => $data['description'],
             'observation' => $data['observation'],
+            'fixed_menu' => $data['fixed_menu'],
             'company_id' => $company->id,
             'date' => $data['date']
         ]);
@@ -58,8 +59,7 @@ class MenusController extends Controller
     {
         $today = new Carbon();
         $today->format('Y-m-d');
-        $menus = Menu::where('company_id', $id)
-            ->where('date', '=', $today)
+        $menus = Menu::whereRaw("company_id = $id and (date = $today or fixed_menu = true")
             ->with(['prices' => function($q) use($id) {
                 $q->where('prices.company_id', $id);
             }])

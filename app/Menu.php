@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Menu extends Model
 {
-    protected $fillable = ['description', 'observation', 'company_id', 'prices_ids', 'ingredients_ids', 'date', 'url', 'image_base64'];
+    protected $fillable = ['description', 'observation', 'company_id', 'prices_ids', 'ingredients_ids', 'date', 'url', 'image_base64', 'fixed_menu'];
     protected $dates = ['deleted_at'];
     use SoftDeletes;
 
