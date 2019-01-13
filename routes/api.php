@@ -27,8 +27,10 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::get('/additionals/restore/{id}', 'AdditionalsController@restore');
     Route::get('/menus/restore/{id}', 'MenusController@restore');
     Route::get('companies/available', 'CompaniesController@getAvailableCompanies');
+    Route::get('companies/available/city/{city_id}', 'CompaniesController@getAvailableCompaniesByCity');
     Route::get('orders/cancel/{id}', 'OrdersController@cancel');
     Route::get('companies_locations/company/{company_id}', 'CompaniesLocationsController@getLocationsByCompany');
+    Route::get('districts/city/{city_id}', 'DistrictsController@getDistrictsByCity');
     Route::delete('service_hours/company/{company_id}', 'ServiceHoursController@destroyByCompany');
     Route::post('password/create', 'PasswordResetController@create');
     Route::get('password/find/{token}', 'PasswordResetController@find');
@@ -52,6 +54,9 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
         'worked_days' => 'WorkedDaysController',
         'additionals' => 'AdditionalsController',
         'menus' => 'MenusController',
-        'service_hours' => 'ServiceHoursController'
+        'service_hours' => 'ServiceHoursController',
+        'states' => 'StatesController',
+        'cities' => 'CitiesController',
+        'district' => 'DistrictsController'
     ]);
 });

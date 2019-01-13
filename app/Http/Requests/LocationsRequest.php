@@ -18,7 +18,6 @@ class LocationsRequest extends FormRequest
             'state' => 'required|max:100|min:3',
             'address' => 'required|max:200|min:3',
             'number' => 'required|max:20',
-            'district' => 'required|max:100|min:3',
             'postal_code' => 'required|formato_cep',
         ];
     }

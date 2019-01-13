@@ -7,13 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Location extends Model
 {
     protected $fillable = [
-        'city', 'state', 'address', 'number', 'district', 'observation',
-        'postal_code', 'latitude', 'longitude', 'client_id', 'company_id'
+        'address', 'number', 'district_id',
+        'observation', 'postal_code', 'latitude',
+        'longitude', 'client_id', 'company_id'
     ];
 
     public function companies()
     {
         return $this->belongsToMany(Company::class);
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
     }
 
     public function clients()
@@ -37,7 +43,7 @@ class Location extends Model
             $query->select('location_id')
                 ->from('client_location')
                 ->where('client_id', $client->first()->id);
-        })->get();
+        })->with(['district', 'district.city', 'district.city.state'])->get();
     }
 
     public static function findLocationsByCompany()
@@ -51,7 +57,16 @@ class Location extends Model
             $query->select('location_id')
                 ->from('company_location')
                 ->where('company_id', $company->first()->id);
-        })->get();
+        })->with(['district', 'district.city', 'district.city.state'])->get();
+    }
+
+    public static function findLocationsByCompanyId($company_id)
+    {
+        return Location::whereIn('locations.id', function ($query) use ($company_id) {
+            $query->select('location_id')
+                ->from('company_location')
+                ->where('company_id', $company_id);
+        })->with(['district', 'district.city', 'district.city.state'])->get();
     }
 
 }

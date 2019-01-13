@@ -16,19 +16,19 @@ class OrdersController extends Controller
         if ($user->type == "company") {
             if (!empty($company)) {
                 return Order::where('id', $company->id)
-                    ->with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+                    ->with(['products', 'location', 'location.district','location.district.city', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
                     ->get();
             }
         }
         if ($user->type == "admin") {
-            return Order::with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])->get();
+            return Order::with(['products', 'location', 'location.district','location.district.city','form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])->get();
         }
     }
 
     public function ordersByClient($id)
     {
         return Order::where('client_id', $id)
-                ->with(['products', 'location', 'form_payment', 'client', 'company', 'company.locations', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+                ->with(['products', 'location', 'location.district','location.district.city', 'form_payment', 'client', 'company', 'company.locations', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
                 ->get();
     }
 
@@ -50,7 +50,7 @@ class OrdersController extends Controller
     public function show(Order $order)
     {
         return Order::where('id', $order->id)
-            ->with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+            ->with(['products', 'location', 'location.district','location.district.city', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
             ->first();
     }
 
@@ -62,13 +62,13 @@ class OrdersController extends Controller
             if (!empty($company)) {
                 return Order::where('company_id', $company->id)
                     ->whereIn('status_id', [1, 5])
-                    ->with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+                    ->with(['products', 'location', 'location.district','location.district.city', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
                     ->orderBy('created_at', 'desc')
                     ->get();
             }
         }
         if ($user->type == "admin") {
-            return Order::with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+            return Order::with(['products', 'location', 'location.district','location.district.city', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
                     ->whereIn('status_id', [1, 5])
                     ->orderBy('created_at', 'desc')
                     ->get();
@@ -83,13 +83,13 @@ class OrdersController extends Controller
             if (!empty($company)) {
                 return Order::where('company_id', $company->id)
                     ->where('status_id', 2)
-                    ->with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+                    ->with(['products', 'location', 'location.district','location.district.city', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
                     ->orderBy('created_at', 'desc')
                     ->get();
             }
         }
         if ($user->type == "admin") {
-            return Order::with(['products', 'location', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
+            return Order::with(['products', 'location', 'location.district','location.district.city', 'form_payment', 'client', 'company', 'products.ingredients', 'products.price', 'products.additionals', 'products.menu'])
                 ->where('status_id', 2)
                 ->orderBy('created_at', 'desc')
                 ->get();

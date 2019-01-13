@@ -16,11 +16,9 @@ class ClientsLocationsController extends Controller
     public function store(Request $request)
     {
         $location = Location::create([
-            'city' => $request->input('city'),
-            'state' => $request->input('state'),
             'address' => $request->input('address'),
             'number' => $request->input('number'),
-            'district' => $request->input('district'),
+            'district_id' => $request->input('district_id'),
             'postal_code' => $request->input('postal_code'),
             'observation' => $request->input('observation'),
         ]);

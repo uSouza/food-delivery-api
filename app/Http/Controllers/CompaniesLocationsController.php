@@ -16,21 +16,15 @@ class CompaniesLocationsController extends Controller
 
     public function getLocationsByCompany($company_id)
     {
-        return DB::table('locations')
-                 ->join('company_location', 'locations.id', '=', 'company_location.location_id')
-                 ->where('company_location.company_id', $company_id)
-                 ->get();
-
+        return Location::findLocationsByCompanyId($company_id);
     }
 
     public function store(Request $request)
     {
         $location = Location::create([
-            'city' => $request->input('city'),
-            'state' => $request->input('state'),
             'address' => $request->input('address'),
             'number' => $request->input('number'),
-            'district' => $request->input('district'),
+            'district_id' => $request->input('district_id'),
             'postal_code' => $request->input('postal_code'),
             'observation' => $request->input('observation'),
         ]);

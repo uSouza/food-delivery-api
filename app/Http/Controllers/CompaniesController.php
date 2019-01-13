@@ -18,7 +18,13 @@ class CompaniesController extends Controller
     public function index()
     {
         $month = Carbon::now()->month;
-        $companies = Company::with(['tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'service_hours', 'worked_days', 'user', 'locations'])->get();
+        $companies = Company::with(
+            [
+                'tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients',
+                'form_payments', 'service_hours', 'worked_days', 'user', 'locations',
+                'locations.district', 'locations.district.city', 'locations.district.city.state'
+            ]
+        )->get();
         foreach ($companies as $c) {
             $number_orders =
                 DB::table('orders')
@@ -48,8 +54,83 @@ class CompaniesController extends Controller
         $weekday = $weekMap[$dayOfTheWeek];
 
         $companies = Company::with(
-            ['tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'locations']
+            [
+                'tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients',
+                'form_payments', 'service_hours', 'worked_days', 'user', 'locations', 
+                'locations.district', 'locations.district.city', 'locations.district.city.state', 
+            ]
         )->get();
+
+        foreach($companies as $c) {
+            $wday = DB::table('worked_days')->select($weekday)->where('company_id', $c->id)->first();
+            $service_hours = ServiceHour::where('company_id', $c->id)->get();
+            $menus = Menu::where('company_id', $c->id)
+                ->where(function ($query) {
+
+                    $today = new Carbon();
+                    $today->format('Y-m-d');
+
+                    $query->where('date', $today)
+                        ->orWhere('fixed_menu', true);
+                })->count();
+            if (! empty($wday)) {
+                if ($wday->$weekday) {
+                    $c->is_open = false;
+                    foreach ($service_hours as $s) {
+                        $opening = Carbon::parse($s->opening)->format('H:i:s');
+                        $closure = Carbon::parse($s->closure)->format('H:i:s');
+                        if (! $c->is_open) {
+                            if ($hour >= $opening and $hour <= $closure and $menus > 0) {
+                                $c->is_open = true;
+                            } else {
+                                $c->is_open = false;
+                            }
+                        }
+                    }
+                } else {
+                    $c->is_open = false;
+                }
+            }
+            $c ->open_at = DB::table('service_hours')->where('company_id', $c->id)->min('opening');
+        }
+        return $companies;
+    }
+
+    public function getAvailableCompaniesByCity($city_id)
+    {
+        $today = new Carbon();
+        $today->format('Y-m-d');
+        $now = new Carbon();
+        $hour = $now->format('H:i:s');
+        $weekMap = [
+            0 => 'sunday',
+            1 => 'monday',
+            2 => 'tuesday',
+            3 => 'wednesday',
+            4 => 'thursday',
+            5 => 'friday',
+            6 => 'saturday',
+        ];
+        $dayOfTheWeek = Carbon::now()->dayOfWeek;
+        $weekday = $weekMap[$dayOfTheWeek];
+
+        $all_companies = Company::with(
+            [
+                'tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients',
+                'form_payments', 'service_hours', 'worked_days', 'user', 'locations',
+                'locations.district', 'locations.district.city', 'locations.district.city.state',
+            ]
+        )->get();
+
+        $companies = array();
+
+        foreach ($all_companies as $c) {
+            foreach ($c->locations as $l) {
+               if ($l->district->city_id == $city_id) {
+                    array_push($companies, $c);
+                }
+            }
+        }
 
         foreach($companies as $c) {
             $wday = DB::table('worked_days')->select($weekday)->where('company_id', $c->id)->first();
@@ -98,7 +179,11 @@ class CompaniesController extends Controller
 
     public function show($id)
     {
-        $company = Company::where('id', $id)->with(['tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients', 'form_payments', 'service_hours', 'worked_days', 'user', 'locations'])->first();
+        $company = Company::where('id', $id)->with([
+            'tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients',
+            'form_payments', 'service_hours', 'worked_days', 'user', 'locations',
+            'locations.district', 'locations.district.city', 'locations.district.city.state'
+        ])->first();
         return $company;
     }
 
