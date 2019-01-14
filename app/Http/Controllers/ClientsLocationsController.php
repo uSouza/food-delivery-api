@@ -26,7 +26,7 @@ class ClientsLocationsController extends Controller
         $client = $user->findClientByUser();
         $client->locations()->attach($location->id);
 
-        return $location;
+        return Location::with('district')->where('id', $location->id)->first();
     }
 
     public function show($id)
