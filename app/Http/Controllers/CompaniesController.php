@@ -21,7 +21,7 @@ class CompaniesController extends Controller
         $companies = Company::with(
             [
                 'tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients',
-                'form_payments', 'service_hours', 'worked_days', 'user', 'locations',
+                'form_payments', 'service_hours', 'worked_days', 'user', 'locations', 'freights', 'freights.district',
                 'locations.district', 'locations.district.city', 'locations.district.city.state'
             ]
         )->get();
@@ -56,7 +56,7 @@ class CompaniesController extends Controller
         $companies = Company::with(
             [
                 'tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients',
-                'form_payments', 'service_hours', 'worked_days', 'user', 'locations', 
+                'form_payments', 'service_hours', 'worked_days', 'user', 'locations', 'freights', 'freights.district',
                 'locations.district', 'locations.district.city', 'locations.district.city.state', 
             ]
         )->get();
@@ -117,7 +117,7 @@ class CompaniesController extends Controller
         $all_companies = Company::with(
             [
                 'tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients',
-                'form_payments', 'service_hours', 'worked_days', 'user', 'locations',
+                'form_payments', 'service_hours', 'worked_days', 'user', 'locations', 'freights', 'freights.district',
                 'locations.district', 'locations.district.city', 'locations.district.city.state',
             ]
         )->get();
@@ -181,7 +181,7 @@ class CompaniesController extends Controller
     {
         $company = Company::where('id', $id)->with([
             'tags', 'additionals', 'ingredient_groups', 'ingredient_groups.ingredients',
-            'form_payments', 'service_hours', 'worked_days', 'user', 'locations',
+            'form_payments', 'service_hours', 'worked_days', 'user', 'locations', 'freights', 'freights.district',
             'locations.district', 'locations.district.city', 'locations.district.city.state'
         ])->first();
         return $company;

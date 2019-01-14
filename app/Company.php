@@ -67,4 +67,9 @@ class Company extends Model
         return $this->hasMany(IngredientGroup::class);
     }
 
+    public function freights()
+    {
+        return $this->hasMany(Freight::class);
+    }
+
 }

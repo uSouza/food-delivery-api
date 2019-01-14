@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     protected $fillable = [
-        'price', 'observation', 'receive_at',
+        'price', 'observation', 'receive_at', 'freight_id',
         'client_id', 'company_id', 'deliver', 'status_id',
         'form_payment_id', 'location_id', 'products_ids'
     ];
@@ -40,6 +40,11 @@ class Order extends Model
     public function location()
     {
         return $this->belongsTo(Location::class);
+    }
+
+    public function freight()
+    {
+        return $this->belongsTo(Freight::class);
     }
 
     public function products()

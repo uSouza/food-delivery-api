@@ -17,4 +17,9 @@ class District extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function freights()
+    {
+        return $this->hasMany(Freight::class);
+    }
 }

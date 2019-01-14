@@ -8,8 +8,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:api')->get('/now', function (Request $request) {
+Route::middleware('auth:api')->get('/now', function () {
     return \Carbon\Carbon::now();
+});
+
+Route::middleware('auth:api')->get('/min_version', function () {
+    return '0.0.23';
 });
 
 Route::middleware('auth:api')->prefix('v1')->group(function () {
@@ -31,6 +35,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::get('orders/cancel/{id}', 'OrdersController@cancel');
     Route::get('companies_locations/company/{company_id}', 'CompaniesLocationsController@getLocationsByCompany');
     Route::get('districts/city/{city_id}', 'DistrictsController@getDistrictsByCity');
+    Route::get('freights/company/{company_id}', 'FreightsController@getFreightsByCompany');
     Route::delete('service_hours/company/{company_id}', 'ServiceHoursController@destroyByCompany');
     Route::post('password/create', 'PasswordResetController@create');
     Route::get('password/find/{token}', 'PasswordResetController@find');
@@ -57,6 +62,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
         'service_hours' => 'ServiceHoursController',
         'states' => 'StatesController',
         'cities' => 'CitiesController',
-        'district' => 'DistrictsController'
+        'districts' => 'DistrictsController',
+        'freights' => 'FreightsController'
     ]);
 });
