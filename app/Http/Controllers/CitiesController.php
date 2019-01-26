@@ -9,7 +9,7 @@ class CitiesController extends Controller
 {
     public function index()
     {
-        return City::all();
+        return City::with('state')->get();
     }
     public function store(Request $request)
     {

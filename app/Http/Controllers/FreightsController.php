@@ -40,4 +40,14 @@ class FreightsController extends Controller
         $freight->delete();
         return $freight;
     }
+
+    public function destroyByCompany($company_id)
+    {
+        $freights = Freight::where('company_id', $company_id)->get();
+        foreach ($freights as $freight) {
+            $freight->delete();
+        }
+        return $freights;
+    }
+
 }

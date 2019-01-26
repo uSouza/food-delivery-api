@@ -9,11 +9,11 @@ class DistrictsController extends Controller
 {
     public function index()
     {
-        return District::all();
+        return District::with('city', 'city.state')->get();
     }
 
     public function getDistrictsByCity($city_id) {
-        return District::with('city')->where('city_id', $city_id)->get();
+        return District::with('city')->where('city_id', $city_id)->orderBy('name')->get();
     }
 
     public function store(Request $request)

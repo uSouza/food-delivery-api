@@ -37,6 +37,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::get('districts/city/{city_id}', 'DistrictsController@getDistrictsByCity');
     Route::get('freights/company/{company_id}', 'FreightsController@getFreightsByCompany');
     Route::delete('service_hours/company/{company_id}', 'ServiceHoursController@destroyByCompany');
+    Route::delete('freights/company/{company_id}', 'FreightsController@destroyByCompany');
     Route::post('password/create', 'PasswordResetController@create');
     Route::get('password/find/{token}', 'PasswordResetController@find');
     Route::post('password/reset', 'PasswordResetController@reset');
