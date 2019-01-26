@@ -13,7 +13,7 @@ Route::middleware('auth:api')->get('/now', function () {
 });
 
 Route::middleware('auth:api')->get('/min_version', function () {
-    return '0.0.23';
+    return response()->json(['version' => '0.0.23']);
 });
 
 Route::middleware('auth:api')->prefix('v1')->group(function () {
