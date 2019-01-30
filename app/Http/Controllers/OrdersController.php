@@ -70,7 +70,7 @@ class OrdersController extends Controller
                 [
                     'products', 'location', 'location.district','location.district.city',
                     'form_payment', 'client', 'company', 'products.ingredients', 'products.price',
-                    'products.additionals', 'products.menu'
+                    'products.additionals', 'products.menu', 'freight'
                 ]
             )->first();
     }
