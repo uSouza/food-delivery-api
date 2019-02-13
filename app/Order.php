@@ -10,7 +10,8 @@ class Order extends Model
     protected $fillable = [
         'price', 'observation', 'receive_at', 'freight_id',
         'client_id', 'company_id', 'deliver', 'status_id',
-        'form_payment_id', 'location_id', 'products_ids'
+        'form_payment_id', 'location_id', 'products_ids',
+        'platform'
     ];
 
     protected $dates = ['deleted_at'];
