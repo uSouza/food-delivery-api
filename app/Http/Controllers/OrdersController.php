@@ -121,20 +121,17 @@ class OrdersController extends Controller
                             'products.additionals', 'products.menu'
                         ]
                     )->orderBy('created_at', 'desc')
-                    ->get();
+                    ->paginate(7);
             }
         }
-        if ($user->type == "admin") {
-            return Order::with(
-                [
-                    'products', 'location', 'location.district','location.district.city',
-                    'form_payment', 'client', 'company', 'products.ingredients', 'products.price',
-                    'products.additionals', 'products.menu'
-                ]
-            )->where('status_id', 2)
+        return Order::with(
+            [
+                'products', 'location', 'location.district','location.district.city',
+                'form_payment', 'client', 'company', 'products.ingredients', 'products.price',
+                'products.additionals', 'products.menu'
+            ])->where('status_id', 2)
              ->orderBy('created_at', 'desc')
-             ->get();
-        }
+             ->paginate(7);
     }
 
     public function update(Request $request, Order $order)
