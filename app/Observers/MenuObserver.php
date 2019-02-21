@@ -20,7 +20,7 @@ class MenuObserver
 
     public function deleting(Menu $model)
     {
-        $this->removeFile($model);
+        // $this->removeFile($model);
     }
 
     public function updating(Menu $model)
