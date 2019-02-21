@@ -19,7 +19,7 @@ class MenusController extends Controller
                 ->where('company_id', $company->id)
                 ->get();
         }
-        return Menu::with(['prices', 'ingredients', 'company'])->get();
+        return Menu::with(['prices', 'ingredients', 'company'])->orderBy('date', 'desc')->paginate(7);
     }
 
     public function store(Request $request)
