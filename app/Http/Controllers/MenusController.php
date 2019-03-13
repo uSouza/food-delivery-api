@@ -16,9 +16,10 @@ class MenusController extends Controller
         if ($user->type == "company") {
             return Menu::with(['prices', 'ingredients', 'company'])
                 ->where('company_id', $company->id)
+                ->withTrashed()
                 ->paginate(7);
         }
-        return Menu::with(['prices', 'ingredients', 'company'])->orderBy('date', 'desc')->paginate(7);
+        return Menu::with(['prices', 'ingredients', 'company'])->withTrashed()->orderBy('date', 'desc')->paginate(7);
     }
 
     public function store(Request $request)
