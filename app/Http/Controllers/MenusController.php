@@ -101,7 +101,7 @@ class MenusController extends Controller
 
     public function destroy(Menu $menu)
     {
-        $menu->forceDelete();
+        $menu->delete();
         return $menu;
     }
 }
