@@ -43,7 +43,7 @@ class MenusController extends Controller
 
     public function show($id)
     {
-        return Menu::where('id', $id)->with(['prices', 'ingredients', 'ingredients.ingredient_group'])->withTrashed()->first();
+        return Menu::where('id', $id)->with(['prices', 'ingredients', 'ingredients.ingredient_group', 'company'])->withTrashed()->first();
     }
 
     public function restore($id) {
