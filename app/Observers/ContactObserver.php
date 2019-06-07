@@ -17,8 +17,8 @@ class ContactObserver
 {
     public function creating(Contact $contact)
     {
-        Mail::to('contato@pandeco.com.br')
-            ->cc(['michael@pandeco.com.br', 'ivan@pandeco.com.br', 'kleberson@pandeco.com.br'])
+        Mail::to('')
+            ->cc(['', '', ''])
             ->send(new ContactReceived($contact));
     }
 }

@@ -51,7 +51,7 @@ class OrderObserver
             [
                 \GuzzleHttp\RequestOptions::JSON =>
                     [
-                        'app_id' => "18e4fb1f-4d47-4196-8ded-4883a763d9d7",
+                        'app_id' => "",
                         'include_player_ids' => array($user->onesignal_id),
                         'data' => array("foo" => "bar"),
                         'contents' => $content,
@@ -60,7 +60,7 @@ class OrderObserver
             ],
             [
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Basic NjgxNTYxYzctN2FiMi00ZjlmLWE3ODItNmI1NTdmNDgxOGEy'
+                'Authorization' => 'Basic '
             ]
         );
 
@@ -76,7 +76,7 @@ class OrderObserver
                 [
                     \GuzzleHttp\RequestOptions::JSON =>
                         [
-                            'app_id' => "f9e6f12d-e1d9-449f-b5e8-0294874f286c",
+                            'app_id' => "",
                             'include_player_ids' => array($user_company->onesignal_id),
                             'data' => array("foo" => "bar"),
                             'contents' => $content,
@@ -85,7 +85,7 @@ class OrderObserver
                 ],
                 [
                     'Content-Type' => 'application/json',
-                    'Authorization' => 'Basic YWVhOTUyMzItMDc0YS00MTBmLTkxMGYtOTFmZTAwN2MzMTkw'
+                    'Authorization' => 'Basic '
                 ]
             );
         }
@@ -113,7 +113,7 @@ class OrderObserver
                 [
                     \GuzzleHttp\RequestOptions::JSON =>
                         [
-                            'app_id' => "f9e6f12d-e1d9-449f-b5e8-0294874f286c",
+                            'app_id' => "",
                             'include_player_ids' => array($user->onesignal_id),
                             'data' => array("foo" => "bar"),
                             'contents' => $content,
@@ -122,7 +122,7 @@ class OrderObserver
                 ],
                 [
                     'Content-Type' => 'application/json',
-                    'Authorization' => 'Basic YWVhOTUyMzItMDc0YS00MTBmLTkxMGYtOTFmZTAwN2MzMTkw'
+                    'Authorization' => 'Basic '
                 ]
             );
         }
